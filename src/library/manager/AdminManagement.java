@@ -25,7 +25,7 @@ public class AdminManagement {
                     + "2. Quản lí khách hàng.\n"
                     + "3. Báo cáo.\n"
                     + "4. Thoát.");
-            System.out.print("\tYour choice: ");
+            System.out.print("\tLựa chọn của bạn: ");
             choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -37,7 +37,7 @@ public class AdminManagement {
                                 + "3. Xoá sách.\n"
                                 + "4. Tìm sách.\n"
                                 + "5. Trở lại.");
-                        System.out.print("\tYour choice: ");
+                        System.out.print("\tLựa chọn của bạn: ");
                         choice2 = sc.nextInt();
                         sc.nextLine();
                         switch (choice2) {
@@ -58,7 +58,7 @@ public class AdminManagement {
                                 + "3. Xoá thông tin khách hàng.\n"
                                 + "4. Tìm khách hàng.\n"
                                 + "5. Trở lại.");
-                        System.out.print("\tYour choice: ");
+                        System.out.print("\tLựa chọn của bạn: ");
                         choice2 = sc.nextInt();
                         sc.nextLine();
                         switch (choice2) {
@@ -79,7 +79,7 @@ public class AdminManagement {
                                 + "3. chưa có idea.\n"
                                 + "4. chưa có idea.\n"
                                 + "5. Trở lại.");
-                        System.out.print("\tYour choice: ");
+                        System.out.print("\tLựa chọn của bạn: ");
                         choice2 = sc.nextInt();
                         sc.nextLine();
                         switch (choice2) {

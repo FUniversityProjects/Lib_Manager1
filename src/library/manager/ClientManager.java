@@ -35,11 +35,11 @@ public class ClientManager {
         int choice = 0;
         int choice2 = 0;
         do {
-            System.out.println("----------- CLIENT MENU -----------");
+            System.out.println("----------- MENU KHÁCH HÀNG -----------");
             System.out.println("1. Quản lí sách.\n"
                     + "2. Thông tin cá nhân.\n"
                     + "3. Thoát.");
-            System.out.print("\tYour choice: ");
+            System.out.print("\tLựa chọn của bạn: ");
             choice = sc.nextInt();
             sc.nextLine();
             switch(choice){
@@ -51,7 +51,7 @@ public class ClientManager {
                                 + "2. Tìm/xem sách theo tác giả.\n"
                                 + "3. Tìm/xem sách theo thể loại.\n"
                                 + "4. Trở lại.");
-                        System.out.print("\tYour choice: ");
+                        System.out.print("\tLựa chọn của bạn: ");
                         choice2 = sc.nextInt(); sc.nextLine();
                         switch(choice2){
                             case 1:
@@ -68,7 +68,7 @@ public class ClientManager {
                                 + "2. Xem thông tin cá nhân.\n"
                                 + "3. Thay đổi password.\n"
                                 + "4. Trở lại.");
-                        System.out.print("\tYour choice: ");
+                        System.out.print("\tLựa chọn của bạn: ");
                         choice2 = sc.nextInt(); sc.nextLine();
                         switch(choice2){
                             case 1:
