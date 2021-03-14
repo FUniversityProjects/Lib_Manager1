@@ -304,7 +304,7 @@ public class Person {
         System.out.print("- Nhập số điện thoại: ");
         this.setPhone(sc.nextLine());
         checkPhone();
-        
+
     }
 
     public void display() {
@@ -313,6 +313,7 @@ public class Person {
         System.out.println("- Số điện thoại: " + this.getPhone());
         System.out.println("- CMND: " + this.getCMND());
         System.out.println("- Email: " + this.getMail());
-        System.out.print("- Location: "); autoAddLocation();
+        System.out.print("- Quê quán: ");
+        autoAddLocation();
     }
 }
