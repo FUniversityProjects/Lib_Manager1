@@ -36,8 +36,6 @@ public class LibraryManager {
 //        book = (Book) ois.readObject();
 //        System.out.println(book.getBookname());
 //
-//        Person check = new Person();
-//        check.input();
         BookManager a = new BookManager();
         a.readFile();
         a.display();
