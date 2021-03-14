@@ -19,29 +19,11 @@ public class LibraryManager {
      * @throws java.io.IOException
      * @throws java.lang.ClassNotFoundException
      */
-    public static void main(String[] args) throws IOException, ClassNotFoundException {   
-//        Book b = new Book();
-//        
-//        b.input();
-//        File file = new File("C:\\Users\\DELL\\Desktop\\test.txt");
-//        OutputStream ip = new FileOutputStream(file);
-//        ObjectOutputStream oos = new ObjectOutputStream(ip);
-//        oos.writeObject(b);
-//        oos.close();
-//        ip.close();
-//        InputStream aa = new FileInputStream(file);
-//        ObjectInputStream ois = new ObjectInputStream(aa);
-//        Book book = new Book();
-//        System.out.println(book.getBookname());
-//        book = (Book) ois.readObject();
-//        System.out.println(book.getBookname());
-//
-//        Person check = new Person();
-//        check.input();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         BookManager a = new BookManager();
-        a.readFile();
+        a.addBooks();
         a.display();
-        
+        a.editByID();
+        a.display();
     }
-    
 }
