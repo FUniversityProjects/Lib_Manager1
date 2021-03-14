@@ -19,9 +19,7 @@ public class LibraryManager {
      * @throws java.io.IOException
      * @throws java.lang.ClassNotFoundException
      */
-<<<<<<< HEAD
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-=======
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {   
 //        Book b = new Book();
 //        
@@ -38,12 +36,9 @@ public class LibraryManager {
 //        System.out.println(book.getBookname());
 //        book = (Book) ois.readObject();
 //        System.out.println(book.getBookname());
-//
->>>>>>> 720e3131ac754111abf97d9a5202ecca113c6fc5
-        BookManager a = new BookManager();
-        a.addBooks();
-        a.display();
-        a.editByID();
-        a.display();
+
+        Person p = new Person();
+        p.input();
+        p.display();
     }
 }
