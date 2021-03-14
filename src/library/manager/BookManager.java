@@ -5,6 +5,7 @@
  */
 package library.manager;
 
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -51,7 +52,41 @@ public class BookManager {
             element.displayF();
         }
     }
-
+    
+    public void readFile() throws IOException, ClassNotFoundException {
+        File file = new File("./Books.txt");
+        
+        if(file.exists()) {
+            FileInputStream fileI = new FileInputStream(file);
+            ObjectInputStream objI = new ObjectInputStream(fileI);
+            while (fileI.available() > 0) {
+                Book book = (Book) objI.readObject();
+                bookList.add(book);
+                
+            }
+            System.out.println("Đã load dữ liệu xong");
+        }
+        else {
+            file.createNewFile();
+        }
+        
+    }
+    
+    public void writeFile() throws FileNotFoundException, IOException {
+        File file = new File("./Books.txt");
+        if(file.exists()) {
+            FileOutputStream fileO = new FileOutputStream(file);
+            ObjectOutputStream objO = new ObjectOutputStream(fileO);
+            for (Book element : bookList) {
+                objO.writeObject(element);
+            }
+            System.out.println("Đã Save dữ liệu xong");
+        }
+        else {
+            file.createNewFile();
+        }
+    }
+        
     public void findByname() {
 
     }

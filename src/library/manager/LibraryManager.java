@@ -34,10 +34,14 @@ public class LibraryManager {
 //        Book book = new Book();
 //        System.out.println(book.getBookname());
 //        book = (Book) ois.readObject();
-//        System.out.println(book.getBookname());//////
-
-        Person check = new Person();
-        check.input();
+//        System.out.println(book.getBookname());
+//
+//        Person check = new Person();
+//        check.input();
+        BookManager a = new BookManager();
+        a.readFile();
+        a.display();
+        
     }
     
 }
