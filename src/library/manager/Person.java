@@ -94,12 +94,27 @@ public class Person {
 
     public void checkMail() {
         if (this.getMail().matches(patternEmail)) {
-            this.setMail(sc.nextLine());
+            System.out.println();
         } else {
             System.out.println("Email không hợp lệ! Vui lòng nhập lại!!!");
             System.out.print("- Nhập email: ");
             this.setMail(sc.nextLine());
             checkMail();
+        }
+    }
+
+    //check số điện thoại
+    String patternPhone = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+
+    public void checkPhone() {
+        if (this.getPhone().matches(patternPhone)) {
+            System.out.print("- Nhập CMND: ");
+            this.setCMND(sc.nextLine());
+        } else {
+            System.out.println("Số điện thoại không hợp lệ!! Vui lòng nhập lại!!");
+            System.out.print("- Nhập số điện thoại: ");
+            this.setPhone(sc.nextLine());
+            checkPhone();
         }
     }
 
@@ -111,8 +126,7 @@ public class Person {
         sc.nextLine();
         System.out.print("- Nhập số điện thoại: ");
         this.setPhone(sc.nextLine());
-        System.out.print("- Nhập CMND: ");
-        this.setCMND(sc.nextLine());
+        checkPhone();
         System.out.print("- Nhập email: ");
         this.setMail(sc.nextLine());
         checkMail();
