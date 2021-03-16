@@ -8,6 +8,8 @@ package library.manager;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,38 +59,52 @@ public class BookManager {
     }
 
     //Nếu file trống thì lỗi, Nhớ fix
-    public void readFile() throws IOException, ClassNotFoundException {
+    public void readFile() {
         File file = new File("./Books.txt");
+        FileInputStream fileI = null;
+        ObjectInputStream objI = null;
         bookList.removeAll(bookList);
-        if (file.exists()) {
-            FileInputStream fileI = new FileInputStream(file);
-            ObjectInputStream objI = new ObjectInputStream(fileI);
-            if (fileI.available() <= 0) {
-                System.out.println("à");
+        try {
+            if (file.exists()) {
+                fileI = new FileInputStream(file);
+                objI = new ObjectInputStream(fileI);
+                while (fileI.available() > 0) {
+                    Book book = (Book) objI.readObject();
+                    bookList.add(0, book);
+                }
+                objI.close();
+                fileI.close();
+                System.out.println("Đã load dữ liệu xong");
+            } else {
+                file.createNewFile();
+                System.out.println("Da tao file moi");
             }
-            while (fileI.available() > 0) {
-                Book book = (Book) objI.readObject();
-                bookList.add(0, book);
-
-            }
-            System.out.println("Đã load dữ liệu xong");
-        } else {
-            file.createNewFile();
-        }
+        } catch (IOException e) {
+            System.out.println("Dữ liệu trống");
+        } catch (ClassNotFoundException e) {
+            
+        } 
+        
 
     }
 
-    public void writeFile() throws FileNotFoundException, IOException {
+    public void writeFile() {
         File file = new File("./Books.txt");
-        if (file.exists()) {
-            FileOutputStream fileO = new FileOutputStream(file);
-            ObjectOutputStream objO = new ObjectOutputStream(fileO);
-            for (Book element : bookList) {
-                objO.writeObject(element);
+        FileOutputStream fileO = null;
+        ObjectOutputStream objO = null;
+        try {
+            if (file.exists()) {
+                fileO = new FileOutputStream(file);
+                objO = new ObjectOutputStream(fileO);
+                for (Book element : bookList) {
+                    objO.writeObject(element);
+                }
+                System.out.println("Đã Save dữ liệu xong");
+            } else {
+                file.createNewFile();
             }
-            System.out.println("Đã Save dữ liệu xong");
-        } else {
-            file.createNewFile();
+        } catch (IOException e) {
+
         }
     }
 
@@ -249,6 +265,7 @@ public class BookManager {
         }
 
     }
+
     //Chưa perfect, xem lại
     public void editByID() {
         ArrayList<Book> editList = new ArrayList<>();
@@ -294,11 +311,11 @@ public class BookManager {
                     scan.nextLine();
                     bookList.add(b);
                 }
-                
+
             }
         }
     }
-    
+
     public void editByName() {
         ArrayList<Book> editList = new ArrayList<>();
         int flag = 0;
@@ -343,8 +360,8 @@ public class BookManager {
                     scan.nextLine();
                     bookList.add(b);
                 }
-                
+
             }
         }
-    } 
+    }
 }

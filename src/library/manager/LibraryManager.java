@@ -5,9 +5,6 @@
  */
 package library.manager;
 
-import java.io.*;
-import java.util.Scanner;
-
 /**
  *
  * @author ACER
@@ -16,29 +13,15 @@ public class LibraryManager {
 
     /**
      * @param args the command line arguments
-     * @throws java.io.IOException
-     * @throws java.lang.ClassNotFoundException
      */
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {   
-//        Book b = new Book();
-//        
-//        b.input();
-//        File file = new File("C:\\Users\\DELL\\Desktop\\test.txt");
-//        OutputStream ip = new FileOutputStream(file);
-//        ObjectOutputStream oos = new ObjectOutputStream(ip);
-//        oos.writeObject(b);
-//        oos.close();
-//        ip.close();
-//        InputStream aa = new FileInputStream(file);
-//        ObjectInputStream ois = new ObjectInputStream(aa);
-//        Book book = new Book();
-//        System.out.println(book.getBookname());
-//        book = (Book) ois.readObject();
-//        System.out.println(book.getBookname());
-
-        Person p = new Person();
-        p.input();
-        p.display();
+    public static void main(String[] args){   
+        
+        BookManager a = new BookManager();
+        a.readFile();
+        a.display();
+        a.deleteByID();
+        a.display();
+        a.writeFile();
     }
 }
