@@ -15,6 +15,7 @@ class Admin extends Person{
     public String pass;
 
     public Admin() {
+        
     }
 
     public Admin(String ID, String acc, String pass) {

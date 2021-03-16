@@ -5,24 +5,35 @@
  */
 package library.manager;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ACER
  */
-class Client extends Person{
+class User extends Person{
     private String ID;
     private String hobby;
     private boolean VIP;
     private boolean borrow;
+    private String userName;
+    public ArrayList<Book> borrowedBooks = new ArrayList<>();
 
-    public Client(String ID, String hobby, boolean VIP, boolean borrow) {
+    public User(String ID, String hobby, boolean VIP, boolean borrow) {
         this.ID = ID;
         this.hobby = hobby;
         this.VIP = VIP;
         this.borrow = borrow;
     }
+    public String getUserName() {
+        return userName;
+    }
 
-    public Client() {
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public User() {
     }
 
     public String getID() {
@@ -59,16 +70,16 @@ class Client extends Person{
     
     @Override
     public void input(){
-        System.out.println("----------- NHẬP THÔNG TIN KHÁCH HÀNG -----------");
+        System.out.println("----------- NHẬP THÔNG TIN NGƯỜI DÙNG -----------");
+        System.out.println("- Nhập tài khoản: "); this.setUserName(sc.nextLine());
         super.input();
-        System.out.print("- Nhập ID: "); this.setID(sc.nextLine());
     }
     
     @Override
     public void display(){
         System.out.println("----------- THÔNG TIN CỦA KHÁCH HÀNG -----------");
-        super.display();
-        System.out.println("ID khách hàng là " + this.getID());
+        super.displayF();
+        System.out.println("Đang mượn: "+this.getBorrow());
     }
     
 }

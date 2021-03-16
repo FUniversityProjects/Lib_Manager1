@@ -4,32 +4,93 @@
  * and open the template in the editor.
  */
 package library.manager;
-
-import java.util.ArrayList;
+import java.io.*;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  *
  * @author ACER
  */
-public class ClientManager {
+public class UserManager {
+    private User user;
+    private Password pass;
+    private HashMap<User, Password> accList= new HashMap<User, Password>();
+    public int numberOfUser;
 
-    ArrayList<Client> clientList = new ArrayList<>();
-    public int numberOfclient;
-
-    public void addFixdelete() {
-
+    public UserManager() {
+        numberOfUser = 3;
     }
-
-    public void findByname() {
-
-    }
-
-    public void findByID() {
-
-    }
+    
 
     Scanner sc = new Scanner(System.in);
+    
+    public void writeFileUser() {
+        File file = new File("./User.txt");
+        FileOutputStream fileO = null;
+        ObjectOutputStream objO = null;
+        try {
+            if (file.exists()) {
+                fileO = new FileOutputStream(file);
+                objO = new ObjectOutputStream(fileO);
+                objO.writeObject(this);
+                objO.close();
+                fileO.close();
+                System.out.println("Đã Save dữ liệu xong");
+            } else {
+                file.createNewFile();
+                fileO = new FileOutputStream(file);
+                objO = new ObjectOutputStream(fileO);
+                objO.writeObject(this);
+                objO.close();
+                fileO.close();
+            }
+        } catch (IOException e) {
+
+        }
+    }
+    
+    public void readFile() {
+        File file = new File("./User.txt");
+        FileInputStream fileI = null;
+        ObjectInputStream objI = null;
+        
+        try {
+            if (file.exists()) {
+                fileI = new FileInputStream(file);
+                objI = new ObjectInputStream(fileI);
+                UserManager a = (UserManager) objI.readObject();
+                objI.close();
+                fileI.close();
+                System.out.println("Đã load dữ liệu xong");
+            } else {
+                file.createNewFile();
+                System.out.println("Da tao file moi");
+            }
+        } catch (IOException e) {
+            System.out.println("Dữ liệu trống");
+        } catch (ClassNotFoundException e) {
+
+        }
+    }
+
+    
+    public void creatAcc() {
+        user = new User();
+        pass = new Password();
+        user.input();
+        pass.input();
+        accList.put(user, pass);
+    }
+    
+    public void display() {
+        Set<User> userSet = accList.keySet();
+        for (User element : userSet) {
+            element.display();
+        }
+    }
+    
     //menu client
     public void menuClient() {
         int choice = 0;
@@ -83,4 +144,6 @@ public class ClientManager {
         }while(choice > 0 && choice < 2);
     
     }
+    
+    
 }

@@ -40,7 +40,7 @@ public class Books extends Book{
             b.setKind(this.getKind());
             b.setMoney(this.getMoney());
             b.setAmount(this.getNumberOfBooks());
-            books.add(b);//////////////
+            books.add(b);
         }
         
         

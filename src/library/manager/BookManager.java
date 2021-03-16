@@ -8,8 +8,6 @@ package library.manager;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -58,7 +56,7 @@ public class BookManager {
         }
     }
 
-    //Nếu file trống thì lỗi, Nhớ fix
+    //Đã fix
     public void readFile() {
         File file = new File("./Books.txt");
         FileInputStream fileI = null;
@@ -82,10 +80,8 @@ public class BookManager {
         } catch (IOException e) {
             System.out.println("Dữ liệu trống");
         } catch (ClassNotFoundException e) {
-            
-        } 
-        
 
+        }
     }
 
     public void writeFile() {

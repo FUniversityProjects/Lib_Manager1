@@ -19,19 +19,19 @@ public class Person {
     private String CMND;
     private String CCCD;
     private String mail;
-    private String location;
+    private String Address;
     private boolean isAd;
     Scanner sc = new Scanner(System.in);
 
     public Person() {
     }
 
-    public Person(double money, int age, String phone, String CMND, String mail, String location, String CCCD) {
+    public Person(double money, int age, String phone, String CMND, String mail, String Address, String CCCD) {
         this.age = age;
         this.phone = phone;
         this.CMND = CMND;
         this.mail = mail;
-        this.location = location;
+        this.Address = Address;
         this.CCCD = CCCD;
     }
 
@@ -51,12 +51,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return Address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String Address) {
+        this.Address = Address;
     }
 
     public int getAge() {
@@ -99,7 +99,7 @@ public class Person {
         this.mail = mail;
     }
 
-    //kiểm tra email
+    //check email
     String patternEmail = "^[a-zA-Z]\\w*@[a-zA-Z]\\w*(\\.[a-zA-Z]\\w*)+$";
 
     public void checkMail() {
@@ -147,8 +147,8 @@ public class Person {
     }
 
     //add vị trí tự động
-    public void autoAddLocation() {
-        String[] cmndList = CMND.split("");
+    public void autoAddAddress() {
+        String[] cmndList = this.getCMND().split("");
         switch (Integer.parseInt(cmndList[0])) {
             case 0:
                 switch (Integer.parseInt(cmndList[1])) {
@@ -314,6 +314,12 @@ public class Person {
         System.out.println("- CMND: " + this.getCMND());
         System.out.println("- Email: " + this.getMail());
         System.out.print("- Quê quán: ");
-        autoAddLocation();
+        autoAddAddress();
+    }
+    
+    public void displayF() {
+        System.out.format("Tên: %s   Quê: %s   CMND/CCCD: unknow   "
+                + "sđt: %s   Email: %s",this.getName(), this.getAddress(), 
+                this.getPhone(), this.getMail());
     }
 }
