@@ -22,17 +22,8 @@ public class LibraryManager {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-        File file = new File("./User.txt");
-        FileInputStream fileI = null;
-        ObjectInputStream objI = null;
-
-        if (file.exists()) {
-            fileI = new FileInputStream(file);
-            objI = new ObjectInputStream(fileI);
-            UserManager a = (UserManager) objI.readObject();
-            objI.close();
-            fileI.close();
-            System.out.println(a.numberOfUser);
-        }
+        Person test = new Person();
+        test.input();
+        test.display();
     }
 }
