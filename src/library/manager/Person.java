@@ -184,7 +184,7 @@ public class Person {
                         System.out.println("Hà Tuyên");
                         break;
                     case 8:
-                        System.out.println("Lạng Sơn");
+                        System.out.println("Cao Bằng / Lạng Sơn");
                         break;
                     case 9:
                         if (Integer.parseInt(cmndList[2]) == 5) {
@@ -206,7 +206,7 @@ public class Person {
                         System.out.println("Hà Tây");
                         break;
                     case 2:
-                        System.out.println("Thành Phố Bắc Giang/ Bắc Ninh");
+                        System.out.println("Thành Phố Bắc Giang / Bắc Ninh");
                         break;
                     case 3:
                         System.out.println("Vĩnh Phúc");
@@ -215,7 +215,7 @@ public class Person {
                         System.out.println("Hải Dương");
                         break;
                     case 5:
-                        System.out.println("Thành Phố Thái Bình/Yên Bái");
+                        System.out.println("Thành Phố Thái Bình / Yên Bái");
                         break;
                     case 6:
                         System.out.println("Hà Nam");
@@ -227,7 +227,7 @@ public class Person {
                         System.out.println("Nghệ An");
                         break;
                     case 9:
-                        System.out.println("Thừa Thiên Huế/ Quảng Bình/ Quảng Trị");
+                        System.out.println("Thừa Thiên Huế / Quảng Bình / Quảng Trị");
                         break;
                     default:
                         break;
@@ -258,10 +258,10 @@ public class Person {
                         System.out.println("Lâm Đồng");
                         break;
                     case 6:
-                        System.out.println("Ninh Thuận/Bình Thuận");
+                        System.out.println("Ninh Thuận / Bình Thuận");
                         break;
                     case 7:
-                        System.out.println("Đồng Nai/Bà Rịa - Vũng Tàu");
+                        System.out.println("Đồng Nai / Bà Rịa - Vũng Tàu");
                         break;
                     case 9:
                         System.out.println("Tây Ninh");
@@ -294,7 +294,7 @@ public class Person {
                         System.out.println("Hậu Giang");
                         break;
                     case 8:
-                        System.out.println("Bạc Liêu/Cà Mau");
+                        System.out.println("Bạc Liêu / Cà Mau");
                         break;
                     default:
                         break;
@@ -488,12 +488,24 @@ public class Person {
         System.out.println("- CMND: " + this.getCMND());
         System.out.println("- Email: " + this.getMail());
         System.out.print("- Quê quán: ");
-        autoAddAddressByCMND();
+        if(this.getCMND().length() == 9) {
+            autoAddAddressByCMND();
+        } else if (this.getCMND().length() == 12){
+            autoAddAddressByCCCD();
+        }
     }
 
     public void displayF() {
-        System.out.format("Tên: %s   Quê: %s   CMND/CCCD: unknow   "
-                + "sđt: %s   Email: %s", this.getName(), this.getAddress(),
-                this.getPhone(), this.getMail());
+        System.out.print(this.getName() + " ");
+        System.out.print(this.getAge() + " ");
+        System.out.print(this.getPhone() + " ");
+        System.out.print(this.getCMND() + " ");
+        System.out.print(this.getMail() + " ");
+        if(this.getCMND().length() == 9) {
+            autoAddAddressByCMND();
+        } else if (this.getCMND().length() == 12){
+            autoAddAddressByCCCD();
+        }
+        System.out.println(" ");
     }
 }

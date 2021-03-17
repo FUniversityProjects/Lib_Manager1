@@ -24,6 +24,6 @@ public class LibraryManager {
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
         Person test = new Person();
         test.input();
-        test.display();
+        test.displayF();
     }
 }
