@@ -80,7 +80,7 @@ class User extends Person implements Serializable{
         
         System.out.print("ID: "+this.getID()+"   ");
         super.displayF();
-        System.out.println("   Đang mượn: "+this.getBorrow());
+        System.out.println("Đang mượn: "+this.getBorrow());
     }
     
 }
