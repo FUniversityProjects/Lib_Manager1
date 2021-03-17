@@ -5,19 +5,20 @@
  */
 package library.manager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author ACER
  */
-class User extends Person{
+class User extends Person implements Serializable{
     private String ID;
     private String hobby;
     private boolean VIP;
     private boolean borrow;
     private String userName;
-    public ArrayList<Book> borrowedBooks = new ArrayList<>();
+//    public ArrayList<Book> borrowedBooks = new ArrayList<>();
 
     public User(String ID, String hobby, boolean VIP, boolean borrow) {
         this.ID = ID;
@@ -71,7 +72,7 @@ class User extends Person{
     @Override
     public void input(){
         System.out.println("----------- NHẬP THÔNG TIN NGƯỜI DÙNG -----------");
-        System.out.println("- Nhập tài khoản: "); this.setUserName(sc.nextLine());
+        System.out.print("- Nhập tài khoản: "); this.setUserName(sc.nextLine());
         super.input();
     }
     
@@ -79,7 +80,7 @@ class User extends Person{
     public void display(){
         System.out.println("----------- THÔNG TIN CỦA KHÁCH HÀNG -----------");
         super.displayF();
-        System.out.println("Đang mượn: "+this.getBorrow());
+        System.out.println("   Đang mượn: "+this.getBorrow());
     }
     
 }

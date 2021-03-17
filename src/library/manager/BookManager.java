@@ -95,9 +95,19 @@ public class BookManager {
                 for (Book element : bookList) {
                     objO.writeObject(element);
                 }
+                objO.close();
+                fileO.close();
                 System.out.println("Đã Save dữ liệu xong");
             } else {
                 file.createNewFile();
+                fileO = new FileOutputStream(file);
+                objO = new ObjectOutputStream(fileO);
+                for (Book element : bookList) {
+                    objO.writeObject(element);
+                }
+                objO.close();
+                fileO.close();
+                System.out.println("Đã Save dữ liệu xong");
             }
         } catch (IOException e) {
 

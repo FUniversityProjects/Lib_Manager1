@@ -5,13 +5,14 @@
  */
 package library.manager;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  *
  * @author ACER
  */
-public class Person {
+public class Person{
 
     private int age;
     private String name;

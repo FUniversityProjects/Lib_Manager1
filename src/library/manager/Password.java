@@ -14,6 +14,7 @@ import java.util.Scanner;
  */
 public class Password {
     private String password;
+    private String ID;
     private Date dateUpdataPass;
 
     public Password() {
@@ -27,6 +28,14 @@ public class Password {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
     
     public void input() {

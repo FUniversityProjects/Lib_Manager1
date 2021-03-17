@@ -5,6 +5,9 @@
  */
 package library.manager;
 import java.io.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+//import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
@@ -16,6 +19,8 @@ import java.util.Set;
 public class UserManager {
     private User user;
     private Password pass;
+    private ArrayList<User> userName = new ArrayList<>();  
+    private ArrayList<Password> passList = new ArrayList<>();
     private HashMap<User, Password> accList= new HashMap<User, Password>();
     public int numberOfUser;
 
@@ -26,7 +31,7 @@ public class UserManager {
 
     Scanner sc = new Scanner(System.in);
     
-    public void writeFileUser() {
+    public void writeFile() {
         File file = new File("./User.txt");
         FileOutputStream fileO = null;
         ObjectOutputStream objO = null;
@@ -34,17 +39,22 @@ public class UserManager {
             if (file.exists()) {
                 fileO = new FileOutputStream(file);
                 objO = new ObjectOutputStream(fileO);
-                objO.writeObject(this);
-                objO.close();
-                fileO.close();
+                for (User element : userName) {
+                    objO.writeObject(element);
+                }
+//                objO.close();
+//                fileO.close();
                 System.out.println("Đã Save dữ liệu xong");
             } else {
                 file.createNewFile();
                 fileO = new FileOutputStream(file);
                 objO = new ObjectOutputStream(fileO);
-                objO.writeObject(this);
+                for (User element : userName) {
+                    objO.writeObject(element);
+                }
                 objO.close();
                 fileO.close();
+                System.out.println("Đã Save dữ liệu xong");
             }
         } catch (IOException e) {
 
@@ -55,12 +65,14 @@ public class UserManager {
         File file = new File("./User.txt");
         FileInputStream fileI = null;
         ObjectInputStream objI = null;
-        
         try {
             if (file.exists()) {
                 fileI = new FileInputStream(file);
                 objI = new ObjectInputStream(fileI);
-                UserManager a = (UserManager) objI.readObject();
+                while (fileI.available() > 0) {
+                    User u = (User)objI.readObject();
+                    userName.add(u);
+                }
                 objI.close();
                 fileI.close();
                 System.out.println("Đã load dữ liệu xong");
@@ -80,16 +92,31 @@ public class UserManager {
         user = new User();
         pass = new Password();
         user.input();
+//        user.setID(autoID());
         pass.input();
         accList.put(user, pass);
+        userName.add(user);
+        passList.add(pass);
     }
     
     public void display() {
         Set<User> userSet = accList.keySet();
-        for (User element : userSet) {
+        for (User element : userName) {
             element.display();
         }
     }
+    
+//    public String autoID() {
+//        Calendar currentCalendar = Calendar.getInstance();
+//        int year = currentCalendar.get(Calendar.YEAR);
+//        int i = 1;
+//        for (User element : userName) {
+//            i++;
+//        }
+//        DecimalFormat formID = new DecimalFormat("####");
+//        String autoID = formID.format(i);
+//        return "U"+year+autoID;
+//    }
     
     //menu client
     public void menuClient() {
