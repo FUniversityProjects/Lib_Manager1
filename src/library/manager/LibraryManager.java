@@ -22,8 +22,6 @@ public class LibraryManager {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-        UserManager a = new UserManager();
-        a.creatAcc();
-        a.writeFile();
+
     }
 }
