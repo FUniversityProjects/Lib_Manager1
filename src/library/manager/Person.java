@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author ACER
  */
-public class Person{
+public class Person implements Serializable {
 
     private int age;
     private String name;
@@ -21,7 +21,7 @@ public class Person{
     private String mail;
     private String Address;
     private boolean isAd;
-    Scanner sc = new Scanner(System.in);
+    transient Scanner sc = new Scanner(System.in);
 
     public Person() {
     }
@@ -489,24 +489,29 @@ public class Person{
         System.out.println("- CMND: " + this.getCMND());
         System.out.println("- Email: " + this.getMail());
         System.out.print("- Quê quán: ");
-        if(this.getCMND().length() == 9) {
+        if (this.getCMND().length() == 9) {
             autoAddAddressByCMND();
-        } else if (this.getCMND().length() == 12){
+        } else if (this.getCMND().length() == 12) {
             autoAddAddressByCCCD();
         }
     }
 
+//    public void displayF() {
+//        System.out.print(this.getName() + " ");
+//        System.out.print(this.getAge() + " ");
+//        System.out.print(this.getPhone() + " ");
+//        System.out.print(this.getCMND() + " ");
+//        System.out.print(this.getMail() + " ");
+//        if(this.getCMND().length() <= 9) {
+//            autoAddAddressByCMND();
+//        } else if (this.getCMND().length() == 12){
+//            autoAddAddressByCCCD();
+//        }
+//        System.out.println(" ");
+//    }
     public void displayF() {
-        System.out.print(this.getName() + " ");
-        System.out.print(this.getAge() + " ");
-        System.out.print(this.getPhone() + " ");
-        System.out.print(this.getCMND() + " ");
-        System.out.print(this.getMail() + " ");
-        if(this.getCMND().length() == 9) {
-            autoAddAddressByCMND();
-        } else if (this.getCMND().length() == 12){
-            autoAddAddressByCCCD();
-        }
-        System.out.println(" ");
+        System.out.format("Tên: %s   Quê: %s   CMND/CCCD: unknow   "
+                + "sđt: %s   Email: %s", this.getName(), this.getAddress(),
+                this.getPhone(), this.getMail());
     }
 }

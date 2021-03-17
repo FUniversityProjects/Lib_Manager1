@@ -7,7 +7,7 @@ package library.manager;
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-//import java.util.Calendar;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
@@ -31,7 +31,7 @@ public class UserManager {
 
     Scanner sc = new Scanner(System.in);
     
-    public void writeFile() {
+    public void writeFileUser() {
         File file = new File("./User.txt");
         FileOutputStream fileO = null;
         ObjectOutputStream objO = null;
@@ -42,8 +42,8 @@ public class UserManager {
                 for (User element : userName) {
                     objO.writeObject(element);
                 }
-//                objO.close();
-//                fileO.close();
+                objO.close();
+                fileO.close();
                 System.out.println("Đã Save dữ liệu xong");
             } else {
                 file.createNewFile();
@@ -61,7 +61,7 @@ public class UserManager {
         }
     }
     
-    public void readFile() {
+    public void readFileUser() {
         File file = new File("./User.txt");
         FileInputStream fileI = null;
         ObjectInputStream objI = null;
@@ -92,7 +92,8 @@ public class UserManager {
         user = new User();
         pass = new Password();
         user.input();
-//        user.setID(autoID());
+        user.setID(autoID());
+        pass.setID(user.getID());
         pass.input();
         accList.put(user, pass);
         userName.add(user);
@@ -100,23 +101,25 @@ public class UserManager {
     }
     
     public void display() {
+        System.out.println("----------- THÔNG TIN CỦA KHÁCH HÀNG -----------");
         Set<User> userSet = accList.keySet();
         for (User element : userName) {
             element.display();
         }
     }
     
-//    public String autoID() {
-//        Calendar currentCalendar = Calendar.getInstance();
-//        int year = currentCalendar.get(Calendar.YEAR);
-//        int i = 1;
-//        for (User element : userName) {
-//            i++;
-//        }
-//        DecimalFormat formID = new DecimalFormat("####");
-//        String autoID = formID.format(i);
-//        return "U"+year+autoID;
-//    }
+    public String autoID() {
+        Calendar currentCalendar = Calendar.getInstance();
+        int year = currentCalendar.get(Calendar.YEAR);
+        int i = 1;
+        for (User element : userName) {
+            i++;
+        }
+        DecimalFormat formID = new DecimalFormat("0000");
+        String autoID = formID.format(i);
+        
+        return "U"+year+autoID;
+    }
     
     //menu client
     public void menuClient() {

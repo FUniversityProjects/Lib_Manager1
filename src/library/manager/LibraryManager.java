@@ -5,12 +5,8 @@
  */
 package library.manager;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.HashMap;
+import java.text.DecimalFormat;
+
 
 /**
  *
@@ -21,7 +17,9 @@ public class LibraryManager {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-
+    public static void main(String[] args){
+        UserManager a = new UserManager();
+        a.readFileUser();
+        a.display();
     }
 }

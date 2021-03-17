@@ -6,7 +6,6 @@
 package library.manager;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  *
@@ -78,7 +77,8 @@ class User extends Person implements Serializable{
     
     @Override
     public void display(){
-        System.out.println("----------- THÔNG TIN CỦA KHÁCH HÀNG -----------");
+        
+        System.out.print("ID: "+this.getID()+"   ");
         super.displayF();
         System.out.println("   Đang mượn: "+this.getBorrow());
     }
