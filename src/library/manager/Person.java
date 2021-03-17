@@ -96,7 +96,7 @@ public class Person implements Serializable {
     public void checkMail() {
         //nếu mail hợp lệ thì cho qua
         if (this.getMail().matches(patternEmail)) {
-            System.out.println();
+            System.out.print("");
             //nếu mail không hợp lệ thì yêu cầu nhập lại và check mail
         } else {
             System.out.println("Email không hợp lệ! Vui lòng nhập lại!!!");
@@ -164,34 +164,34 @@ public class Person implements Serializable {
             case 0:
                 switch (Integer.parseInt(cmndList[1])) {
                     case 1:
-                        System.out.println("Hà Nội");
+                        System.out.print("Hà Nội");
                         break;
                     case 2:
-                        System.out.println("TP.HCM");
+                        System.out.print("TP.HCM");
                         break;
                     case 3:
-                        System.out.println("Hải Phòng");
+                        System.out.print("Hải Phòng");
                         break;
                     case 4:
-                        System.out.println("Lai Châu");
+                        System.out.print("Lai Châu");
                         break;
                     case 5:
-                        System.out.println("Sơn La");
+                        System.out.print("Sơn La");
                         break;
                     case 6:
-                        System.out.println("Lào Cai");
+                        System.out.print("Lào Cai");
                         break;
                     case 7:
-                        System.out.println("Hà Tuyên");
+                        System.out.print("Hà Tuyên");
                         break;
                     case 8:
-                        System.out.println("Cao Bằng / Lạng Sơn");
+                        System.out.print("Cao Bằng / Lạng Sơn");
                         break;
                     case 9:
                         if (Integer.parseInt(cmndList[2]) == 5) {
-                            System.out.println("Bắc Cạn");
+                            System.out.print("Bắc Cạn");
                         } else if (Integer.parseInt(cmndList[2]) == 0 || Integer.parseInt(cmndList[2]) == 1) {
-                            System.out.println("Thái Nguyên");
+                            System.out.print("Thái Nguyên");
                         }
                         break;
                     default:
@@ -201,34 +201,34 @@ public class Person implements Serializable {
             case 1:
                 switch (Integer.parseInt(cmndList[1])) {
                     case 0:
-                        System.out.println("Quảng Ninh");
+                        System.out.print("Quảng Ninh");
                         break;
                     case 1:
-                        System.out.println("Hà Tây");
+                        System.out.print("Hà Tây");
                         break;
                     case 2:
-                        System.out.println("Thành Phố Bắc Giang / Bắc Ninh");
+                        System.out.print("Thành Phố Bắc Giang / Bắc Ninh");
                         break;
                     case 3:
-                        System.out.println("Vĩnh Phúc");
+                        System.out.print("Vĩnh Phúc");
                         break;
                     case 4:
-                        System.out.println("Hải Dương");
+                        System.out.print("Hải Dương");
                         break;
                     case 5:
-                        System.out.println("Thành Phố Thái Bình / Yên Bái");
+                        System.out.print("Thành Phố Thái Bình / Yên Bái");
                         break;
                     case 6:
-                        System.out.println("Hà Nam");
+                        System.out.print("Hà Nam");
                         break;
                     case 7:
-                        System.out.println("Thanh Hoá");
+                        System.out.print("Thanh Hoá");
                         break;
                     case 8:
-                        System.out.println("Nghệ An");
+                        System.out.print("Nghệ An");
                         break;
                     case 9:
-                        System.out.println("Thừa Thiên Huế / Quảng Bình / Quảng Trị");
+                        System.out.print("Thừa Thiên Huế / Quảng Bình / Quảng Trị");
                         break;
                     default:
                         break;
@@ -237,35 +237,35 @@ public class Person implements Serializable {
             case 2:
                 switch (Integer.parseInt(cmndList[1])) {
                     case 0:
-                        System.out.println("Quảng Nam");
+                        System.out.print("Quảng Nam");
                         break;
                     case 1:
-                        System.out.println("Bình Định");
+                        System.out.print("Bình Định");
                         break;
                     case 2:
-                        System.out.println("Phú Yên");
+                        System.out.print("Phú Yên");
                         break;
                     case 3:
                         if (Integer.parseInt(cmndList[2]) == 0 || Integer.parseInt(cmndList[2]) == 1) {
-                            System.out.println("Gia Lai");
+                            System.out.print("Gia Lai");
                         } else {
-                            System.out.println("Kon Tum");
+                            System.out.print("Kon Tum");
                         }
                         break;
                     case 4:
-                        System.out.println("Đắk Lắk");
+                        System.out.print("Đắk Lắk");
                         break;
                     case 5:
-                        System.out.println("Lâm Đồng");
+                        System.out.print("Lâm Đồng");
                         break;
                     case 6:
-                        System.out.println("Ninh Thuận / Bình Thuận");
+                        System.out.print("Ninh Thuận / Bình Thuận");
                         break;
                     case 7:
-                        System.out.println("Đồng Nai / Bà Rịa - Vũng Tàu");
+                        System.out.print("Đồng Nai / Bà Rịa - Vũng Tàu");
                         break;
                     case 9:
-                        System.out.println("Tây Ninh");
+                        System.out.print("Tây Ninh");
                         break;
                     default:
                         break;
@@ -274,28 +274,28 @@ public class Person implements Serializable {
             case 3:
                 switch (Integer.parseInt(cmndList[1])) {
                     case 0:
-                        System.out.println("Long An");
+                        System.out.print("Long An");
                         break;
                     case 1:
-                        System.out.println("Tiền Giang");
+                        System.out.print("Tiền Giang");
                         break;
                     case 2:
-                        System.out.println("Bến Tre");
+                        System.out.print("Bến Tre");
                         break;
                     case 3:
-                        System.out.println("Vĩnh Long");
+                        System.out.print("Vĩnh Long");
                         break;
                     case 4:
-                        System.out.println("Đồng Tháp");
+                        System.out.print("Đồng Tháp");
                         break;
                     case 5:
-                        System.out.println("An Giang");
+                        System.out.print("An Giang");
                         break;
                     case 6:
-                        System.out.println("Hậu Giang");
+                        System.out.print("Hậu Giang");
                         break;
                     case 8:
-                        System.out.println("Bạc Liêu / Cà Mau");
+                        System.out.print("Bạc Liêu / Cà Mau");
                         break;
                     default:
                         break;
@@ -322,149 +322,149 @@ public class Person implements Serializable {
         if (this.getCMND().matches(patternCCCD)) {
             if (element2 == 0) {
                 if (element3 == 1) {
-                    System.out.println(arrCCCD[1]);
+                    System.out.print(arrCCCD[1]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[2]);
+                    System.out.print(arrCCCD[2]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[3]);
+                    System.out.print(arrCCCD[3]);
                 } else if (element3 == 6) {
-                    System.out.println(arrCCCD[4]);
+                    System.out.print(arrCCCD[4]);
                 } else if (element3 == 8) {
-                    System.out.println(arrCCCD[5]);
+                    System.out.print(arrCCCD[5]);
                 }
             } else if (element2 == 1) {
                 if (element3 == 0) {
-                    System.out.println(arrCCCD[6]);
+                    System.out.print(arrCCCD[6]);
                 } else if (element3 == 1) {
-                    System.out.println(arrCCCD[7]);
+                    System.out.print(arrCCCD[7]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[8]);
+                    System.out.print(arrCCCD[8]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[9]);
+                    System.out.print(arrCCCD[9]);
                 } else if (element3 == 5) {
-                    System.out.println(arrCCCD[10]);
+                    System.out.print(arrCCCD[10]);
                 } else if (element3 == 7) {
-                    System.out.println(arrCCCD[11]);
+                    System.out.print(arrCCCD[11]);
                 } else if (element3 == 9) {
-                    System.out.println(arrCCCD[12]);
+                    System.out.print(arrCCCD[12]);
                 }
             } else if (element2 == 2) {
                 if (element3 == 0) {
-                    System.out.println(arrCCCD[13]);
+                    System.out.print(arrCCCD[13]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[14]);
+                    System.out.print(arrCCCD[14]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[15]);
+                    System.out.print(arrCCCD[15]);
                 } else if (element3 == 5) {
-                    System.out.println(arrCCCD[16]);
+                    System.out.print(arrCCCD[16]);
                 } else if (element3 == 6) {
-                    System.out.println(arrCCCD[17]);
+                    System.out.print(arrCCCD[17]);
                 } else if (element3 == 7) {
-                    System.out.println(arrCCCD[18]);
+                    System.out.print(arrCCCD[18]);
                 }
             } else if (element2 == 3) {
                 if (element3 == 0) {
-                    System.out.println(arrCCCD[19]);
+                    System.out.print(arrCCCD[19]);
                 } else if (element3 == 1) {
-                    System.out.println(arrCCCD[20]);
+                    System.out.print(arrCCCD[20]);
                 } else if (element3 == 3) {
-                    System.out.println(arrCCCD[21]);
+                    System.out.print(arrCCCD[21]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[22]);
+                    System.out.print(arrCCCD[22]);
                 } else if (element3 == 5) {
-                    System.out.println(arrCCCD[23]);
+                    System.out.print(arrCCCD[23]);
                 } else if (element3 == 6) {
-                    System.out.println(arrCCCD[24]);
+                    System.out.print(arrCCCD[24]);
                 } else if (element3 == 7) {
-                    System.out.println(arrCCCD[25]);
+                    System.out.print(arrCCCD[25]);
                 } else if (element3 == 8) {
-                    System.out.println(arrCCCD[26]);
+                    System.out.print(arrCCCD[26]);
                 }
             } else if (element2 == 4) {
                 if (element3 == 0) {
-                    System.out.println(arrCCCD[27]);
+                    System.out.print(arrCCCD[27]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[28]);
+                    System.out.print(arrCCCD[28]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[29]);
+                    System.out.print(arrCCCD[29]);
                 } else if (element3 == 5) {
-                    System.out.println(arrCCCD[30]);
+                    System.out.print(arrCCCD[30]);
                 } else if (element3 == 6) {
-                    System.out.println(arrCCCD[31]);
+                    System.out.print(arrCCCD[31]);
                 } else if (element3 == 8) {
-                    System.out.println(arrCCCD[32]);
+                    System.out.print(arrCCCD[32]);
                 } else if (element3 == 9) {
-                    System.out.println(arrCCCD[33]);
+                    System.out.print(arrCCCD[33]);
                 }
             } else if (element2 == 5) {
                 if (element3 == 1) {
-                    System.out.println(arrCCCD[34]);
+                    System.out.print(arrCCCD[34]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[35]);
+                    System.out.print(arrCCCD[35]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[36]);
+                    System.out.print(arrCCCD[36]);
                 } else if (element3 == 6) {
-                    System.out.println(arrCCCD[37]);
+                    System.out.print(arrCCCD[37]);
                 } else if (element3 == 8) {
-                    System.out.println(arrCCCD[38]);
+                    System.out.print(arrCCCD[38]);
                 }
             } else if (element2 == 6) {
                 if (element3 == 0) {
-                    System.out.println(arrCCCD[39]);
+                    System.out.print(arrCCCD[39]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[40]);
+                    System.out.print(arrCCCD[40]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[41]);
+                    System.out.print(arrCCCD[41]);
                 } else if (element3 == 6) {
-                    System.out.println(arrCCCD[42]);
+                    System.out.print(arrCCCD[42]);
                 } else if (element3 == 7) {
-                    System.out.println(arrCCCD[43]);
+                    System.out.print(arrCCCD[43]);
                 } else if (element3 == 8) {
-                    System.out.println(arrCCCD[44]);
+                    System.out.print(arrCCCD[44]);
                 }
             } else if (element2 == 7) {
                 if (element3 == 0) {
-                    System.out.println(arrCCCD[45]);
+                    System.out.print(arrCCCD[45]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[46]);
+                    System.out.print(arrCCCD[46]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[47]);
+                    System.out.print(arrCCCD[47]);
                 } else if (element3 == 5) {
-                    System.out.println(arrCCCD[48]);
+                    System.out.print(arrCCCD[48]);
                 } else if (element3 == 7) {
-                    System.out.println(arrCCCD[49]);
+                    System.out.print(arrCCCD[49]);
                 } else if (element3 == 9) {
-                    System.out.println(arrCCCD[50]);
+                    System.out.print(arrCCCD[50]);
                 }
             } else if (element2 == 8) {
                 if (element3 == 0) {
-                    System.out.println(arrCCCD[51]);
+                    System.out.print(arrCCCD[51]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[52]);
+                    System.out.print(arrCCCD[52]);
                 } else if (element3 == 3) {
-                    System.out.println(arrCCCD[53]);
+                    System.out.print(arrCCCD[53]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[54]);
+                    System.out.print(arrCCCD[54]);
                 } else if (element3 == 6) {
-                    System.out.println(arrCCCD[55]);
+                    System.out.print(arrCCCD[55]);
                 } else if (element3 == 7) {
-                    System.out.println(arrCCCD[56]);
+                    System.out.print(arrCCCD[56]);
                 } else if (element3 == 9) {
-                    System.out.println(arrCCCD[57]);
+                    System.out.print(arrCCCD[57]);
                 }
             } else if (element2 == 9) {
                 if (element3 == 1) {
-                    System.out.println(arrCCCD[58]);
+                    System.out.print(arrCCCD[58]);
                 } else if (element3 == 2) {
-                    System.out.println(arrCCCD[59]);
+                    System.out.print(arrCCCD[59]);
                 } else if (element3 == 3) {
-                    System.out.println(arrCCCD[60]);
+                    System.out.print(arrCCCD[60]);
                 } else if (element3 == 4) {
-                    System.out.println(arrCCCD[61]);
+                    System.out.print(arrCCCD[61]);
                 } else if (element3 == 5) {
-                    System.out.println(arrCCCD[62]);
+                    System.out.print(arrCCCD[62]);
                 } else if (element3 == 6) {
-                    System.out.println(arrCCCD[63]);
+                    System.out.print(arrCCCD[63]);
                 }
             }
         }
@@ -496,22 +496,10 @@ public class Person implements Serializable {
         }
     }
 
-//    public void displayF() {
-//        System.out.print(this.getName() + " ");
-//        System.out.print(this.getAge() + " ");
-//        System.out.print(this.getPhone() + " ");
-//        System.out.print(this.getCMND() + " ");
-//        System.out.print(this.getMail() + " ");
-//        if(this.getCMND().length() <= 9) {
-//            autoAddAddressByCMND();
-//        } else if (this.getCMND().length() == 12){
-//            autoAddAddressByCCCD();
-//        }
-//        System.out.println(" ");
-//    }
     public void displayF() {
-        System.out.format("Tên: %s   Quê: %s   CMND/CCCD: unknow   "
-                + "sđt: %s   Email: %s", this.getName(), this.getAddress(),
-                this.getPhone(), this.getMail());
+        System.out.print("Tên: "+this.getName() + "   ");
+        System.out.print("SĐT: "+this.getPhone() + "   ");
+        System.out.print("CMND: "+this.getCMND() + "   ");
+        System.out.print("Email: "+this.getMail() + "   ");
     }
 }

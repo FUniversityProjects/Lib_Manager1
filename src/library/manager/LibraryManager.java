@@ -5,8 +5,7 @@
  */
 package library.manager;
 
-import java.text.DecimalFormat;
-
+import java.io.IOException;
 
 /**
  *
@@ -17,9 +16,10 @@ public class LibraryManager {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args){
-        UserManager a = new UserManager();
-        a.readFileUser();
-        a.display();
+    public static void main(String[] args) {
+
+        UserManager um = new UserManager();
+        um.creatAcc();
+        um.display();
     }
 }
