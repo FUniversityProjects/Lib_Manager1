@@ -6,6 +6,7 @@
 package library.manager;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +18,7 @@ class User extends Person implements Serializable{
     private boolean VIP;
     private boolean borrow;
     private String userName;
-//    public ArrayList<Book> borrowedBooks = new ArrayList<>();
+     ArrayList<Book> borrowedBooks = new ArrayList<Book>();
 
     public User(String ID, String hobby, boolean VIP, boolean borrow) {
         this.ID = ID;
@@ -77,7 +78,6 @@ class User extends Person implements Serializable{
     
     @Override
     public void display(){
-        
         System.out.print("ID: "+this.getID()+"   ");
         super.displayF();
         System.out.println("   Đang mượn: "+this.getBorrow());

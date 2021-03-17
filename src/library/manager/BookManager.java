@@ -129,31 +129,7 @@ public class BookManager {
             System.out.println("Không tìm thấy!");
         }
     }
-
-    public void findByName1() {
-        ArrayList<Book> editList = new ArrayList<>();
-        int flag = 0;
-        System.out.print("Nhập tên: ");
-        String name = scan.nextLine();
-        System.out.println("Kết quả: ");
-        for (Book element : bookList) {
-            if (element.getBookname().contains(name)) {
-                element.displayF();
-                editList.add(element);
-                flag = 1;
-            }
-        }
-        if (flag == 0) {
-            System.out.println("Không tìm thấy!");
-        } else {
-            System.out.println("1. Xóa hết những sách này"
-                    + "\n2. Hủy bỏ xóa"
-                    + "\n\t Lựa chọn: ");
-            int c = scan.nextInt();
-            scan.nextLine();
-        }
-    }
-
+    
     public void findByKind() {
         int flag = 0;
         System.out.print("Nhập thể loại: ");

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package library.manager;
-
 import java.util.Date;
 import java.util.Scanner;
 
@@ -16,7 +15,7 @@ public class Password {
     private String password;
     private String ID;
     private Date dateUpdataPass;
-
+    
     public Password() {
     }
     
