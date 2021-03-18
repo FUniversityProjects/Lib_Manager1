@@ -5,9 +5,11 @@
         <group>
             <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/UserManager.java</file>
             <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/LibraryManager.java</file>
-            <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/Book.java</file>
+            <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/User.java</file>
+            <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/AdminManagement.java</file>
             <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/BookManager.java</file>
             <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/Password.java</file>
+            <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/Admin.java</file>
             <file>file:/C:/Users/DELL/Desktop/LibManager/src/library/manager/Person.java</file>
         </group>
     </open-files>

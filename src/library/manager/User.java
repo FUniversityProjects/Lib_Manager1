@@ -18,7 +18,7 @@ class User extends Person implements Serializable{
     private boolean VIP;
     private boolean borrow;
     private String userName;
-     ArrayList<Book> borrowedBooks = new ArrayList<Book>();
+    ArrayList<Book> borrowedBooks = new ArrayList<Book>();
 
     public User(String ID, String hobby, boolean VIP, boolean borrow) {
         this.ID = ID;
@@ -73,6 +73,11 @@ class User extends Person implements Serializable{
     public void input(){
         System.out.println("----------- NHẬP THÔNG TIN NGƯỜI DÙNG -----------");
         System.out.print("- Nhập tài khoản: "); this.setUserName(sc.nextLine());
+        super.input();
+    }
+    
+    public void inputEdit(){
+        System.out.println("----------- NHẬP THÔNG TIN NGƯỜI DÙNG -----------");
         super.input();
     }
     

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package library.manager;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ import java.util.Scanner;
  *
  * @author DELL
  */
-public class Password {
+public class Password implements Serializable{
     private String password;
     private String ID;
     private Date dateUpdataPass;
@@ -19,7 +20,7 @@ public class Password {
     public Password() {
     }
     
-    Scanner scan = new Scanner(System.in);
+    transient Scanner scan = new Scanner(System.in);
     
     public String getPassword() {
         return password;

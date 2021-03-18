@@ -17,9 +17,9 @@ public class LibraryManager {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        UserManager um = new UserManager();
-        um.creatAcc();
-        um.display();
+        UserManager a = new UserManager();
+        a.readFile();
+        a.display();
+        a.a();
     }
 }

@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -29,7 +30,13 @@ public class UserManager {
         numberOfUser = 3;
     }
 
-    Scanner sc = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
+    
+    public void a() {
+        for (Password element : passList) {
+            System.out.println(element.getPassword() +": " +element.getID());
+        }
+    }
 
     public void writeFileUser() {
         File file = new File("./User.txt");
@@ -117,7 +124,7 @@ public class UserManager {
         }
     }
     public void readFilePass() {
-        File file = new File("./User.txt");
+        File file = new File("./P.txt");
         FileInputStream fileI = null;
         ObjectInputStream objI = null;
         try {
@@ -192,19 +199,104 @@ public class UserManager {
         }
     }
 
+    /**
+     * Tự cấp ID cho user mới
+     * @return ID (String)
+     */
     public String autoID() {
         Calendar currentCalendar = Calendar.getInstance();
         int year = currentCalendar.get(Calendar.YEAR);
-        int i = 1;
-        for (User element : userName) {
-            i++;
+        int count = 1;
+        if (userName.size() > 0) {
+            String[] id = userName.get(userName.size()-1).getID().split("");
+            String a = id[id.length-4]+id[id.length-3]+id[id.length-2]+id[id.length-1];
+            count = Integer.parseInt(a)+1;
         }
         DecimalFormat formID = new DecimalFormat("0000");
-        String autoID = formID.format(i);
+        String autoID = formID.format(count);
 
         return "U" + year + autoID;
     }
-
+    
+    public void findUser() {
+        ArrayList<User> selectUser = new ArrayList<User>();
+        System.out.print("Nhap tu khoa: ");
+        String key = scan.nextLine();
+        int flag = 0;
+        System.out.println("Kết quả tìm kiếm:");
+        for (User element : userName) {
+            if (element.getID().contains(key)){
+                element.display();
+                selectUser.add(element);
+                flag = 1;
+            }
+            else if (element.getUserName().contains(key)){
+                element.display();
+                selectUser.add(element);
+                flag = 1;
+            }
+            else if (element.getCMND().contains(key)){
+                element.display();
+                flag = 1;
+                selectUser.add(element);
+            }
+            else if (element.getPhone().contains(key)){
+                element.display();
+                selectUser.add(element);
+                flag = 1;
+            }
+            else if (element.getUserName().contains(key)){
+                element.display();
+                selectUser.add(element);
+                flag = 1;
+            }
+            else if (element.getName().contains(key)){
+                element.display();
+                selectUser.add(element);
+                flag = 1;
+            }
+            
+        }
+        int c = 0;
+        if (flag == 0)
+                System.out.println("Không tìm thấy!");
+        else {
+            System.out.println("1. Xóa tất cả người dùng này."
+                    + "\n2. Sửa thông tin người dùng này."
+                    + "\n3. Hủy bỏ.");
+            c = scan.nextInt();
+            scan.nextLine();
+            if(c == 1) {
+                userName.removeAll(selectUser);
+                for (User element : selectUser) {
+                    for (int i = 0; i < passList.size(); i++) {
+                        if(passList.get(i).getID().equals(element.getID())) {
+                            passList.remove(passList.get(i));
+                        }
+                    }
+                }
+            }
+            else if (c == 2) {
+                if(selectUser.size() > 1) {
+                    System.out.println("Không thể sửa thông tin của nhiều người dùng một lúc!");
+                }
+                else if (selectUser.size() == 1) {
+                    User u = new User();
+                    u.setID(selectUser.get(0).getID());
+                    u.setUserName(selectUser.get(0).getUserName());
+                    u.inputEdit();
+                    userName.removeAll(selectUser);
+                    userName.add(u);
+                    
+                }
+            }
+        }
+    }
+    
+    public void deleteUser() {
+        
+    }
+    
     //menu client
     public void menuClient() {
         int choice = 0;
@@ -215,8 +307,8 @@ public class UserManager {
                     + "2. Thông tin cá nhân.\n"
                     + "3. Thoát.");
             System.out.print("\tLựa chọn của bạn: ");
-            choice = sc.nextInt();
-            sc.nextLine();
+            choice = scan.nextInt();
+            scan.nextLine();
             switch (choice) {
                 case 1:
                     do {
@@ -227,8 +319,8 @@ public class UserManager {
                                 + "3. Tìm/xem sách theo thể loại.\n"
                                 + "4. Trở lại.");
                         System.out.print("\tLựa chọn của bạn: ");
-                        choice2 = sc.nextInt();
-                        sc.nextLine();
+                        choice2 = scan.nextInt();
+                        scan.nextLine();
                         switch (choice2) {
                             case 1:
                             case 2:
@@ -246,8 +338,8 @@ public class UserManager {
                                 + "3. Thay đổi password.\n"
                                 + "4. Trở lại.");
                         System.out.print("\tLựa chọn của bạn: ");
-                        choice2 = sc.nextInt();
-                        sc.nextLine();
+                        choice2 = scan.nextInt();
+                        scan.nextLine();
                         switch (choice2) {
                             case 1:
                             case 2:
