@@ -5,7 +5,6 @@
  */
 package library.manager;
 
-import java.io.IOException;
 
 /**
  *
@@ -13,13 +12,7 @@ import java.io.IOException;
  */
 public class LibraryManager {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        UserManager a = new UserManager();
-        a.readFile();
-        a.display();
-        a.a();
+        
     }
 }
