@@ -5,6 +5,8 @@
  */
 package library.manager;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  *
@@ -12,7 +14,9 @@ package library.manager;
  */
 public class LibraryManager {
 
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
+        MenuManagement m = new MenuManagement();
+        m.loginMenu();
     }
+
 }

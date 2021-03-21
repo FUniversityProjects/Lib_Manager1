@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package library.manager;
 
 import java.io.*;
@@ -18,8 +13,8 @@ import java.util.Scanner;
  */
 public class UserManager {
 
-    private User user;
-    private Password pass;
+    private User user = new User();
+    private Password pass = new Password();
     private ArrayList<User> userName = new ArrayList<>();
     private ArrayList<Password> passList = new ArrayList<>();
     private HashMap<User, Password> accList = new HashMap<User, Password>();
@@ -230,11 +225,16 @@ public class UserManager {
         return (flag == 1 ? true : false);
     }
 
-    public void display() {
+    public void displayList() {
         System.out.println("----------- THÔNG TIN CỦA KHÁCH HÀNG -----------");
         for (User element : userName) {
             element.display();
         }
+    }
+
+    public void display() {
+        System.out.println("----------- THÔNG TIN CỦA BẠN -----------");
+        user.display();
     }
 
     /**
@@ -257,41 +257,47 @@ public class UserManager {
         return "U" + year + autoID;
     }
 
-    private boolean chechChangePass(String pass1) {
+    private boolean checkChangePass(String pass1) {
         System.out.println("Nhập mật khẩu mới: ");
         pass1 = scan.nextLine();
         System.out.println("Nhập lại mật khẩu mới: ");
         String pass2 = scan.next();
         if (pass1.equals(pass2)) {
             return true;
-        }
-        else
+        } else {
             return false;
+        }
     }
-    
+
     /**
      * Chưa xong, đợi fix
      */
     public void changePass() {
-        MenuManagement m = new MenuManagement();
         System.out.print("- Nhập mật khẩu hiện tại: ");
         String currentPass = scan.nextLine();
-        for (User element : userName) {
-            if (m.getTk().equals(element.getUserName())) {
-                for (int i = 0; i < passList.size(); i++) {
-                    if (passList.get(i).getID().equals(element.getID())) {
-                        if (passList.get(i).getPassword().equals(currentPass)) {
-                            if (true) {
-                                
-                            }
-                        } else {
-                            System.out.println("Sai mật khẩu!");
-                        }
+        if (pass.getPassword().equals(currentPass)) {
+            System.out.print("- Nhập mật khẩu mới: ");
+            String newPass = scan.nextLine();
+            System.out.print("- Nhập lại mật khẩu mới: ");
+            String reNewPass = scan.nextLine();
+            if(newPass.equals(reNewPass)) {
+                readFilePass();
+                for(Password element : passList) {
+                    if (element.getID().equals(user.getID()) && element.getPassword().equals(pass.getPassword())) {
+                        element.setPassword(newPass);
                     }
                 }
+                writeFilePass();
+                System.out.println("Thay đổi mật khẩu thành công!");
+            }
+            else {
+                System.out.println("Nhập sai!");
+                changePass();
             }
         }
-
+        else {
+            System.out.println("Sai mật khẩu!");
+        }
     }
 
     public void findUser() {
@@ -362,8 +368,72 @@ public class UserManager {
         }
     }
 
-    public void deleteUser() {
-
+    public boolean login() throws FileNotFoundException, IOException, ClassNotFoundException {
+        boolean flag = false;
+        String tk, mk;
+        File fileu = new File("./User.txt");
+        File filep = new File("./P.txt");
+        do {
+            System.out.println("----------- LOGIN -----------");
+            System.out.print("TÀI KHOẢN: ");
+            tk = scan.nextLine();
+            System.out.print("MẬT KHẨU: ");
+            mk = scan.nextLine();
+            if (filep.exists() && fileu.exists()) {
+                FileInputStream fisu = new FileInputStream(fileu);
+                FileInputStream fisp = new FileInputStream(filep);
+                ObjectInputStream oisu = new ObjectInputStream(fisu);
+                ObjectInputStream oisp = new ObjectInputStream(fisp);
+                while (fisu.available() > 0) {
+                    User u = (User) oisu.readObject();
+                    if (u.getUserName().equals(tk)) {
+                        while (fisp.available() > 0) {
+                            Password p = (Password) oisp.readObject();
+                            if (p.getPassword().equals(mk) && u.getID().equals(p.getID())) {
+                                flag = true;
+                                user = u;
+                                pass = p;
+                            }
+                        }
+                    }
+                }
+                if (!flag) {
+                    System.out.println("Sai tên tài khoản hoặc mật khẩu!");
+                }
+            }
+        } while (!flag);
+        return flag;
     }
 
+    public void borrowedBookList() {
+        boolean flag = false;
+        System.out.println("Sách đang mượn: ");
+        for (Book element : user.borrowedBooks) {
+            element.displayF();
+            flag = true;
+        }
+
+        if (!flag) {
+            System.out.println("Bạn chưa mượn sách!");
+        }
+    }
+
+    public static boolean checkObjectExist(File file) {
+        FileInputStream fis = null;
+        boolean check = true;
+        try {
+            fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            if (ois.readObject() == null) {
+                check = false;
+            }
+        } catch (FileNotFoundException ex) {
+            check = false;
+        } catch (IOException ex) {
+            check = false;
+        } catch (ClassNotFoundException ex) {
+            check = false;
+        }
+        return check;
+    }
 }

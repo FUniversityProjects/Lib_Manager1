@@ -81,12 +81,16 @@ class User extends Person implements Serializable{
         super.input();
     }
     
-    @Override
-    public void display(){
+    public void displayList(){
         System.out.print("ID: "+this.getID()+"   ");
         super.displayF();
         System.out.println("Đang mượn: "+this.getBorrow());
     }
     
+    @Override
+    public void display() {
+        System.out.println("ID: "+this.getID());
+        super.display();
+    }
 }
 

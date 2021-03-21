@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 package library.manager;
+import java.io.Serializable;
 
 /**
  *
  * @author ACER
  */
-class Admin extends Person{
+class Admin extends User implements Serializable {
     private String ID;
-    public String acc;
-    public String pass;
+    private String acc;
+    private String pass;
 
     public Admin() {
         
@@ -24,18 +25,10 @@ class Admin extends Person{
         this.pass = pass;
     }
 
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
     public String getAcc() {
         return acc;
     }
-
+    
     public void setAcc(String acc) {
         this.acc = acc;
     }

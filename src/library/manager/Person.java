@@ -491,8 +491,10 @@ public class Person implements Serializable {
         System.out.print("- Quê quán: ");
         if (this.getCMND().length() == 9) {
             autoAddAddressByCMND();
+            System.out.println("");
         } else if (this.getCMND().length() == 12) {
             autoAddAddressByCCCD();
+            System.out.println("");
         }
     }
 

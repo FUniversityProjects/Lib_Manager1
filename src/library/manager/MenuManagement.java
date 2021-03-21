@@ -5,6 +5,8 @@
  */
 package library.manager;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -12,7 +14,8 @@ import java.util.Scanner;
  * @author PC
  */
 public class MenuManagement {
-
+    BookManager b = new BookManager();
+    UserManager a = new UserManager();
     String tk;
     String mk;
 
@@ -34,42 +37,17 @@ public class MenuManagement {
 
     Scanner scan = new Scanner(System.in);
 
-    public void menuLogin() {
-        UserManager a = new UserManager();
-        int flag = 0;
-        a.readFile();
-        a.connect();
+    public void loginMenu() throws IOException, FileNotFoundException, ClassNotFoundException {
 
-        System.out.println("----------- LOGIN -----------");
-        System.out.print("TÀI KHOẢN: ");
-        tk = scan.nextLine();
-        System.out.print("MẬT KHẨU: ");
-        mk = scan.nextLine();
-        for (User element : a.getUserName()) {
-            if (tk.equals(element.getUserName())) {
-                for (Password password : a.getPassList()) {
-                    if (element.getID().equals(password.getID())) {
-                        if (password.getPassword().equals(mk) && element.getIsAd() == false) {
-                            menuClient();
-                            flag = 1;
-                        } else if (password.getPassword().equals(mk) && element.getIsAd() == true) {
-                            menuAdmin();
-                            flag = 1;
-                        }
-                    }
-                }
-            }
-        }
-        if (flag == 0) {
-            System.out.println("Sai tài khoản hoặc mật khẩu!");
+        if (a.login()) {
+            b.readFile();
+            menuClient();
         }
 
     }
 
     //menu client
     public void menuClient() {
-        BookManager b = new BookManager();
-        b.readFile();
         int choice = 0;
         int choice2 = 0;
         do {
@@ -105,26 +83,32 @@ public class MenuManagement {
                             default:
                                 menuClient();
                         }
-                    } while (choice2 > 0 && choice2 < 3);
+                    } while (choice2 > 0 && choice2 < 4);
                     break;
                 case 2:
                     do {
                         System.out.println("----------- THÔNG TIN CÁ NHÂN -----------");
                         System.out.println("1. Xem sách đang mượn.\n"
                                 + "2. Xem thông tin cá nhân.\n"
-                                + "3. Thay đổi password.\n"
+                                + "3. Thay đổi mật khẩu.\n"
                                 + "4. Trở lại.");
                         System.out.print("\tLựa chọn của bạn: ");
                         choice2 = scan.nextInt();
                         scan.nextLine();
                         switch (choice2) {
                             case 1:
+                                a.borrowedBookList();
+                                break;
                             case 2:
+                                a.display();
+                                break;
                             case 3:
+                                a.changePass();
+                                break;
                             default:
                                 menuClient();
                         }
-                    } while (choice2 > 0 && choice2 < 3);
+                    } while (choice2 > 0 && choice2 < 4);
                     break;
                 default:
                     break;
