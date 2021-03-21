@@ -47,12 +47,19 @@ public class BookManager {
                 }
             }
         }
+        writeFile();
 
     }
 
     public void display() {
+        boolean flag = false;
+        System.out.println("Danh sách: ");
         for (Book element : bookList) {
             element.displayF();
+            flag = true;
+        }
+        if (!flag) {
+            System.out.println("Danh sách trống!");
         }
     }
 
@@ -114,61 +121,22 @@ public class BookManager {
         }
     }
 
-    public void findByName() {
+    public void findBook() {
         int flag = 0;
         System.out.print("Nhập tên: ");
-        String name = scan.nextLine();
+        String key = scan.nextLine();
         System.out.println("Kết quả: ");
         for (Book element : bookList) {
-            if (element.getBookname().contains(name)) {
+            if (element.getBookname().contains(key)) {
                 element.displayF();
                 flag = 1;
-            }
-        }
-        if (flag == 0) {
-            System.out.println("Không tìm thấy!");
-        }
-    }
-    
-    public void findByKind() {
-        int flag = 0;
-        System.out.print("Nhập thể loại: ");
-        String kind = scan.nextLine();
-        System.out.println("Kết quả: ");
-        for (Book element : bookList) {
-            if (element.getKind().contains(kind)) {
+            } else if (element.getKind().contains(key)) {
                 element.displayF();
                 flag = 1;
-            }
-        }
-        if (flag == 0) {
-            System.out.println("Không tìm thấy!");
-        }
-    }
-
-    public void findByAuthor() {
-        int flag = 0;
-        System.out.print("Nhập tác giả: ");
-        String author = scan.nextLine();
-        System.out.println("Kết quả: ");
-        for (Book element : bookList) {
-            if (element.getAuthor().contains(author)) {
+            } else if (element.getAuthor().contains(key)) {
                 element.displayF();
                 flag = 1;
-            }
-        }
-        if (flag == 0) {
-            System.out.println("Không tìm thấy!");
-        }
-    }
-
-    public void findByID() {
-        int flag = 0;
-        System.out.print("Nhập ID: ");
-        String ID = scan.nextLine();
-        System.out.println("Kết quả: ");
-        for (Book element : bookList) {
-            if (element.getID().contains(ID)) {
+            } else if (element.getID().contains(key)) {
                 element.displayF();
                 flag = 1;
             }
@@ -208,6 +176,7 @@ public class BookManager {
                     }
                 }
                 bookList.removeAll(deleteList);
+                writeFile();
             }
         }
 
@@ -243,6 +212,7 @@ public class BookManager {
                     }
                 }
                 bookList.removeAll(deleteList);
+                writeFile();
             }
         }
 
@@ -293,6 +263,7 @@ public class BookManager {
                     scan.nextLine();
                     bookList.add(b);
                 }
+                writeFile();
 
             }
         }
@@ -342,8 +313,11 @@ public class BookManager {
                     scan.nextLine();
                     bookList.add(b);
                 }
+                writeFile();
 
             }
         }
     }
+    
+    
 }

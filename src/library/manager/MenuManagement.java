@@ -14,10 +14,15 @@ import java.util.Scanner;
  * @author PC
  */
 public class MenuManagement {
+
     BookManager b = new BookManager();
-    UserManager a = new UserManager();
+    UserManager a;
     String tk;
     String mk;
+
+    public MenuManagement() throws IOException {
+        a = new UserManager();
+    }
 
     public String getTk() {
         return tk;
@@ -38,12 +43,15 @@ public class MenuManagement {
     Scanner scan = new Scanner(System.in);
 
     public void loginMenu() throws IOException, FileNotFoundException, ClassNotFoundException {
-
-        if (a.login()) {
+        int i = a.login();
+        if (i == 1) {
             b.readFile();
             menuClient();
+        } else if (i == 2) {
+            a.readFile();
+            b.readFile();
+            menuAdmin();
         }
-
     }
 
     //menu client
@@ -63,27 +71,23 @@ public class MenuManagement {
                     do {
                         choice = 0;
                         System.out.println("----------- QUẢN LÍ SÁCH -----------");
-                        System.out.println("1. Tìm/xem sách theo tên.\n"
-                                + "2. Tìm/xem sách theo tác giả.\n"
-                                + "3. Tìm/xem sách theo thể loại.\n"
-                                + "4. Trở lại.");
+                        System.out.println("1. Xem tất cả sách.\n"
+                                + "2. Tìm/xem sách.\n"
+                                + "3. Trở lại.");
                         System.out.print("\tLựa chọn của bạn: ");
                         choice2 = scan.nextInt();
                         scan.nextLine();
                         switch (choice2) {
                             case 1:
-                                b.findByName();
+                                b.display();
                                 break;
                             case 2:
-                                b.findByAuthor();
-                                break;
-                            case 3:
-                                b.findByKind();
+                                b.findBook();
                                 break;
                             default:
                                 menuClient();
                         }
-                    } while (choice2 > 0 && choice2 < 4);
+                    } while (choice2 > 0 && choice2 < 3);
                     break;
                 case 2:
                     do {
@@ -117,15 +121,16 @@ public class MenuManagement {
     }
 
     //menu admin
-    public void menuAdmin() {
+    public void menuAdmin() throws IOException, FileNotFoundException, ClassNotFoundException {
         int choice = 0;
         int choice2 = 0;
         do {
             System.out.println("----------- ADMIN MENU -----------");
             System.out.println("1. Quản lí sách.\n"
                     + "2. Quản lí khách hàng.\n"
-                    + "3. Báo cáo.\n"
-                    + "4. Thoát.");
+                    + "3. Báo cáo."
+                    + "\n4. Đổi mật khẩu."
+                    + "\n5. Thoát.");
             System.out.print("\tLựa chọn của bạn: ");
             choice = scan.nextInt();
             scan.nextLine();
@@ -137,40 +142,63 @@ public class MenuManagement {
                                 + "2. Sửa sách.\n"
                                 + "3. Xoá sách.\n"
                                 + "4. Tìm sách.\n"
-                                + "5. Trở lại.");
+                                + "5. Xem tất cả sách."
+                                + "\n6. Mượn sách."
+                                + "\n7. Trở lại.");
                         System.out.print("\tLựa chọn của bạn: ");
                         choice2 = scan.nextInt();
                         scan.nextLine();
                         switch (choice2) {
                             case 1:
+                                b.addBooks();
+                                break;
                             case 2:
+                                b.editByID();
+                                break;
                             case 3:
+                                b.deleteByID();
+                                break;
                             case 4:
+                                b.findBook();
+                                break;
+                            case 5:
+                                b.display();
+                                break;
+                            case 6:
+                                a.borrowBook();
+                                break;
                             default:
                                 menuAdmin();
                         }
-                    } while (choice2 > 0 && choice2 < 5);
+                    } while (choice2 > 0 && choice2 < 7);
                     break;
                 case 2:
                     do {
                         System.out.println("----------- QUẢN LÍ KHÁCH HÀNG -----------");
-                        System.out.println("1. Thêm thông tin khách hàng.\n"
-                                + "2. Sửa thông tin khách hàng.\n"
-                                + "3. Xoá thông tin khách hàng.\n"
-                                + "4. Tìm khách hàng.\n"
-                                + "5. Trở lại.");
+                        System.out.println("1. Thêm khách hàng mới.\n"
+                                + "2. Danh sách khách hàng.\n"
+                                + "3. Quản lý khách hàng.\n"
+                                + "4. Trở lại");
                         System.out.print("\tLựa chọn của bạn: ");
                         choice2 = scan.nextInt();
                         scan.nextLine();
                         switch (choice2) {
                             case 1:
+                                a.creatAcc();
+                                break;
                             case 2:
+                                a.displayList();
+                                break;
                             case 3:
+                                a.findUser();
+                                break;
                             case 4:
+                                System.out.println("BYE");
+                                break;
                             default:
                                 menuAdmin();
                         }
-                    } while (choice2 > 0 && choice2 < 5);
+                    } while (choice2 > 0 && choice2 < 3);
                     break;
                 case 3:
                     do {
@@ -185,18 +213,31 @@ public class MenuManagement {
                         scan.nextLine();
                         switch (choice2) {
                             case 1:
+                                System.out.println("Đang phát triển!");
+                                break;
                             case 2:
+                                System.out.println("Đang phát triển!");
+                                break;
                             case 3:
+                                System.out.println("Đang phát triển!");
+                                break;
                             case 4:
+                                System.out.println("Đang phát triển!");
+                                break;
                             default:
                                 menuAdmin();
                         }
                     } while (choice2 > 0 && choice2 < 5);
                     break;
+                case 4:
+                    a.changePass();
+                    break;
+                case 5:
+                    break;
                 default:
-                    System.out.println("Bye!");
+                    System.out.println("Không lựa tồn tại lựa chọn này!");
                     break;
             }
-        } while (choice > 1 && choice < 4);
+        } while (choice > 1 && choice < 5);
     }
 }

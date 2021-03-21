@@ -2,6 +2,7 @@ package library.manager;
 
 import java.io.*;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -20,8 +21,8 @@ public class UserManager {
     private HashMap<User, Password> accList = new HashMap<User, Password>();
     public int numberOfUser;
 
-    public UserManager() {
-        numberOfUser = 3;
+    public UserManager() throws IOException {
+        numberOfUser = 0;
     }
 
     public ArrayList<User> getUserName() {
@@ -54,6 +55,25 @@ public class UserManager {
         for (Password element : passList) {
             System.out.println(element.getPassword() + ": " + element.getID());
         }
+    }
+
+    public int numberOfUser() throws FileNotFoundException, IOException, ClassNotFoundException {
+        numberOfUser = 0;
+        File file = new File("./User.txt");
+        FileInputStream fileI = null;
+        ObjectInputStream objI = null;
+        if (file.exists()) {
+            User u;
+            fileI = new FileInputStream(file);
+            objI = new ObjectInputStream(fileI);
+            while (fileI.available() > 0) {
+                u = (User) objI.readObject();
+                numberOfUser++;
+            }
+            objI.close();
+            fileI.close();
+        }
+        return numberOfUser;
     }
 
     public void writeFileUser() {
@@ -143,6 +163,47 @@ public class UserManager {
         }
     }
 
+    public int login() throws FileNotFoundException, IOException, ClassNotFoundException {
+        int flag = 0;
+        String tk, mk;
+        File fileu = new File("./User.txt");
+        File filep = new File("./P.txt");
+        do {
+            System.out.println("----------- LOGIN -----------");
+            System.out.print("TÀI KHOẢN: ");
+            tk = scan.nextLine();
+            System.out.print("MẬT KHẨU: ");
+            mk = scan.nextLine();
+            if (filep.exists() && fileu.exists()) {
+                FileInputStream fisu = new FileInputStream(fileu);
+                FileInputStream fisp = new FileInputStream(filep);
+                ObjectInputStream oisu = new ObjectInputStream(fisu);
+                ObjectInputStream oisp = new ObjectInputStream(fisp);
+                while (fisu.available() > 0) {
+                    User u = (User) oisu.readObject();
+                    if (u.getUserName().equals(tk)) {
+                        while (fisp.available() > 0) {
+                            Password p = (Password) oisp.readObject();
+                            if (p.getPassword().equals(mk) && u.getID().equals(p.getID()) && !u.getIsAd()) {
+                                flag = 1;
+                                user = u;
+                                pass = p;
+                            } else if (p.getPassword().equals(mk) && u.getID().equals(p.getID()) && u.getIsAd()) {
+                                flag = 2;
+                                user = u;
+                                pass = p;
+                            }
+                        }
+                    }
+                }
+                if (flag == 0) {
+                    System.out.println("Sai tên tài khoản hoặc mật khẩu!");
+                }
+            }
+        } while (flag == 0);
+        return flag;
+    }
+
     public void readFilePass() {
         File file = new File("./P.txt");
         FileInputStream fileI = null;
@@ -183,19 +244,38 @@ public class UserManager {
      * Tạo tài khoản người dùng mới
      */
     public void creatAcc() {
-        user = new User();
-        pass = new Password();
+        User user = new User();
+        Password pass = new Password();
         user.input();
         if (checkExistUser(user.getUserName())) {
             System.out.println("Tên tài khoản đã tồn tại!");
             creatAcc();
+        } else {
+            user.setID(autoID());
+            pass.setID(user.getID());
+            pass.input();
+            accList.put(user, pass);
+            userName.add(user);
+            passList.add(pass);
+            writeFile();
         }
-        user.setID(autoID());
-        pass.setID(user.getID());
-        pass.input();
-        accList.put(user, pass);
-        userName.add(user);
+    }
+
+    public void format() {
+        User ad = new User();
+        Password pass = new Password();
+        ad.setID("A20210001");
+        ad.setName("Admin");
+        ad.setUserName("admin");
+        ad.setIsAd(true);
+        ad.setPhone("0388833303");
+        ad.setCMND("366273867");
+        ad.setMail("truongan147258@gmail.com");
+        pass.setID(ad.getID());
+        pass.setPassword("admin");
+        userName.add(ad);
         passList.add(pass);
+        writeFile();
     }
 
     public void connect() {
@@ -225,10 +305,10 @@ public class UserManager {
         return (flag == 1 ? true : false);
     }
 
-    public void displayList() {
-        System.out.println("----------- THÔNG TIN CỦA KHÁCH HÀNG -----------");
+    public void displayList() throws IOException, FileNotFoundException, ClassNotFoundException {
+        System.out.println("----------- DANH SÁCH KHÁCH HÀNG (" + this.numberOfUser() + ") -----------");
         for (User element : userName) {
-            element.display();
+            element.displayList();
         }
     }
 
@@ -238,7 +318,7 @@ public class UserManager {
     }
 
     /**
-     * Tự cấp ID cho user mới
+     * Tự cấp ID cho user mới.
      *
      * @return ID (String)
      */
@@ -270,7 +350,7 @@ public class UserManager {
     }
 
     /**
-     * Chưa xong, đợi fix
+     * Đổi mật khẩu, đã fix.
      */
     public void changePass() {
         System.out.print("- Nhập mật khẩu hiện tại: ");
@@ -280,22 +360,20 @@ public class UserManager {
             String newPass = scan.nextLine();
             System.out.print("- Nhập lại mật khẩu mới: ");
             String reNewPass = scan.nextLine();
-            if(newPass.equals(reNewPass)) {
+            if (newPass.equals(reNewPass)) {
                 readFilePass();
-                for(Password element : passList) {
+                for (Password element : passList) {
                     if (element.getID().equals(user.getID()) && element.getPassword().equals(pass.getPassword())) {
                         element.setPassword(newPass);
                     }
                 }
                 writeFilePass();
                 System.out.println("Thay đổi mật khẩu thành công!");
-            }
-            else {
+            } else {
                 System.out.println("Nhập sai!");
                 changePass();
             }
-        }
-        else {
+        } else {
             System.out.println("Sai mật khẩu!");
         }
     }
@@ -307,28 +385,28 @@ public class UserManager {
         int flag = 0;
         System.out.println("Kết quả tìm kiếm:");
         for (User element : userName) {
-            if (element.getID().contains(key)) {
-                element.display();
+            if (element.getID().contains(key) && !element.getIsAd()) {
+                element.displayList();
                 selectUser.add(element);
                 flag = 1;
-            } else if (element.getUserName().contains(key)) {
-                element.display();
+            } else if (element.getUserName().contains(key) && !element.getIsAd()) {
+                element.displayList();
                 selectUser.add(element);
                 flag = 1;
-            } else if (element.getCMND().contains(key)) {
-                element.display();
+            } else if (element.getCMND().contains(key) && !element.getIsAd()) {
+                element.displayList();
                 flag = 1;
                 selectUser.add(element);
-            } else if (element.getPhone().contains(key)) {
-                element.display();
+            } else if (element.getPhone().contains(key) && !element.getIsAd()) {
+                element.displayList();
                 selectUser.add(element);
                 flag = 1;
-            } else if (element.getUserName().contains(key)) {
-                element.display();
+            } else if (element.getUserName().contains(key) && !element.getIsAd()) {
+                element.displayList();
                 selectUser.add(element);
                 flag = 1;
-            } else if (element.getName().contains(key)) {
-                element.display();
+            } else if (element.getName().contains(key) && !element.getIsAd()) {
+                element.displayList();
                 selectUser.add(element);
                 flag = 1;
             }
@@ -338,9 +416,11 @@ public class UserManager {
         if (flag == 0) {
             System.out.println("Không tìm thấy!");
         } else {
-            System.out.println("1. Xóa tất cả người dùng này."
+            System.out.print("1. Xóa tất cả người dùng này."
                     + "\n2. Sửa thông tin người dùng này."
-                    + "\n3. Hủy bỏ.");
+                    + "\n3. Xem thông tin chi tiết."
+                    + "\n4. Hủy bỏ."
+                    + "\n\tLựa chọn của bạn:");
             c = scan.nextInt();
             scan.nextLine();
             if (c == 1) {
@@ -349,6 +429,7 @@ public class UserManager {
                     for (int i = 0; i < passList.size(); i++) {
                         if (passList.get(i).getID().equals(element.getID())) {
                             passList.remove(passList.get(i));
+                            writeFile();
                         }
                     }
                 }
@@ -362,54 +443,32 @@ public class UserManager {
                     u.inputEdit();
                     userName.removeAll(selectUser);
                     userName.add(u);
+                    writeFile();
+                }
+            } else if (c == 3) {
+                System.out.println("--------THÔNG TIN KHÁCH HÀNG-------");
+                for (User element : selectUser) {
+                    element.display();
+                    boolean l = false;
+                    System.out.println("Sách đang mượn: ");
+                    for (Book e : element.borrowedBooks) {
+                        e.displayBorrow();
+                        l = true;
+                    }
 
+                    if (!l) {
+                        System.out.println("Chưa mượn sách!");
+                    }
                 }
             }
         }
-    }
-
-    public boolean login() throws FileNotFoundException, IOException, ClassNotFoundException {
-        boolean flag = false;
-        String tk, mk;
-        File fileu = new File("./User.txt");
-        File filep = new File("./P.txt");
-        do {
-            System.out.println("----------- LOGIN -----------");
-            System.out.print("TÀI KHOẢN: ");
-            tk = scan.nextLine();
-            System.out.print("MẬT KHẨU: ");
-            mk = scan.nextLine();
-            if (filep.exists() && fileu.exists()) {
-                FileInputStream fisu = new FileInputStream(fileu);
-                FileInputStream fisp = new FileInputStream(filep);
-                ObjectInputStream oisu = new ObjectInputStream(fisu);
-                ObjectInputStream oisp = new ObjectInputStream(fisp);
-                while (fisu.available() > 0) {
-                    User u = (User) oisu.readObject();
-                    if (u.getUserName().equals(tk)) {
-                        while (fisp.available() > 0) {
-                            Password p = (Password) oisp.readObject();
-                            if (p.getPassword().equals(mk) && u.getID().equals(p.getID())) {
-                                flag = true;
-                                user = u;
-                                pass = p;
-                            }
-                        }
-                    }
-                }
-                if (!flag) {
-                    System.out.println("Sai tên tài khoản hoặc mật khẩu!");
-                }
-            }
-        } while (!flag);
-        return flag;
     }
 
     public void borrowedBookList() {
         boolean flag = false;
         System.out.println("Sách đang mượn: ");
         for (Book element : user.borrowedBooks) {
-            element.displayF();
+            element.displayBorrow();
             flag = true;
         }
 
@@ -435,5 +494,67 @@ public class UserManager {
             check = false;
         }
         return check;
+    }
+
+    public void borrowBook() {
+        Calendar day = Calendar.getInstance();
+        SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
+        BookManager b = new BookManager();
+        b.readFile();
+        Book bb = new Book();
+        User u = new User();
+        int i = 0;
+        System.out.print("Nhập ID khách hàng: ");
+        String idu = scan.nextLine();
+        for (User element : userName) {
+            if (element.getID().contains(idu) && !element.getIsAd()) {
+                i++;
+                element.displayList();
+                u = element;
+            }
+        }
+        if (i == 1) {
+            i = 0;
+            System.out.print("Nhập ID sách: ");
+            String idb = scan.nextLine();
+            
+            for (Book element : b.bookList) {
+                if (element.getID().contains(idb)) {
+                    i++;
+                    element.displayF();
+                    bb = element;
+                }
+
+            }
+            if (i == 1) {
+                System.out.print("1. Cho mượn."
+                        + "\n2. Hủy bỏ."
+                        + "\n\tLựa chọn: ");
+                int c = scan.nextInt();
+                if (c == 1) {
+                    bb.setDateBorrow(form.format(day.getTime()));
+                    day.add(day.DATE, 15);
+                    bb.setDateRefund(form.format(day.getTime()));
+                    for (int j = 0; j < userName.size(); j++) {
+                        if (userName.get(j).getID().equals(u.getID())) {
+                            userName.get(j).setBorrow(true);
+                            userName.get(j).borrowedBooks.add(bb);
+                        }
+                    }
+                    for (int k = 0; k < b.bookList.size(); k++) {
+                        if (b.bookList.get(k).getID().equals(bb.getID())) {
+                            b.bookList.get(k).setBorrowed(true);
+                            
+                        }
+                    }
+                    b.writeFile();
+                    writeFile();
+                }
+            } else {
+                System.out.println("Chỉ được chọn 1 sách!");
+            }
+        } else {
+            System.out.println("Chỉ chọn 1 khách hàng.");
+        }
     }
 }

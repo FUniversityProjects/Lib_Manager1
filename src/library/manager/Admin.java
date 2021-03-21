@@ -62,8 +62,8 @@ class Admin extends User implements Serializable {
         checkAccount();
     }
     
-    @Override
-    public void display(){
+
+    public void displayA(){
         System.out.println("----------- THÔNG TIN QUẢN TRỊ VIÊN -----------");
         super.display();
         System.out.println("- ID quản trị viên là " + this.getID());

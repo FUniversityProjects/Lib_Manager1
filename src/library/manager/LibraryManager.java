@@ -17,6 +17,9 @@ public class LibraryManager {
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         MenuManagement m = new MenuManagement();
         m.loginMenu();
+//            UserManager u = new UserManager();
+//            u.format();
+
     }
 
 }

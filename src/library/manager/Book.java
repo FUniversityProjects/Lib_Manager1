@@ -22,7 +22,8 @@ public class Book implements Serializable{
     public String condition;
     public int amount;
     public String ID;
-
+    public String dateBorrow;
+    public String dateRefund;
     public Book() {
         this.borrowed = false;
     }
@@ -34,6 +35,22 @@ public class Book implements Serializable{
         this.kind = kind;
         this.borrowed = borrowed;
         this.condition = condition;
+    }
+
+    public String getDateBorrow() {
+        return dateBorrow;
+    }
+
+    public void setDateBorrow(String dateBorrow) {
+        this.dateBorrow = dateBorrow;
+    }
+
+    public String getDateRefund() {
+        return dateRefund;
+    }
+
+    public void setDateRefund(String dateRefund) {
+        this.dateRefund = dateRefund;
     }
 
     public double getMoney() {
@@ -130,5 +147,9 @@ public class Book implements Serializable{
 
     public void displayF() {
         System.out.format("ID: %s   Tên: %s   Thể loại: %s   Tác giả: %s   Số lượng: %d   Đang mượn: %s %n", this.getID(), this.getBookname(), this.getKind(), this.getAuthor(), this.getAmount(), this.getBorrowed());
+    }
+    
+    public void displayBorrow() {
+        System.out.format("ID: %s   Tên: %s   Thể loại: %s   Tác giả: %s%nNgày mượn: %s   Ngày trả: %s%n", this.getID(), this.getBookname(), this.getKind(), this.getAuthor(), this.getDateBorrow(), this.getDateRefund());
     }
 }
