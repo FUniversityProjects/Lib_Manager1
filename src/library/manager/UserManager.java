@@ -557,4 +557,9 @@ public class UserManager {
             System.out.println("Chỉ chọn 1 khách hàng.");
         }
     }
+    
+    public void reFund() {
+        System.out.print("Nhập ID sách: ");
+        String idb = scan.nextLine();
+    }
 }
