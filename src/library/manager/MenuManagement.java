@@ -69,7 +69,6 @@ public class MenuManagement {
             switch (choice) {
                 case 1:
                     do {
-                        choice = 0;
                         System.out.println("----------- QUẢN LÍ SÁCH -----------");
                         System.out.print("1. Xem tất cả sách.\n"
                                 + "2. Tìm/xem sách.\n"
