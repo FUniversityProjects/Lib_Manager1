@@ -69,7 +69,6 @@ public class MenuManagement {
             switch (choice) {
                 case 1:
                     do {
-                        choice = 0;
                         System.out.println("----------- QUẢN LÍ SÁCH -----------");
                         System.out.print("1. Xem tất cả sách.\n"
                                 + "2. Tìm/xem sách.\n"
@@ -127,7 +126,7 @@ public class MenuManagement {
                     System.out.println("Xin lỗi! Chỉ chọn từ 1 đến 3!");
                     menuClient();
             }
-        } while (choice > 0 && choice < 2);
+        } while (choice > 0 && choice < 3);
     }
 
     //menu admin
