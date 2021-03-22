@@ -173,7 +173,7 @@ public class Person implements Serializable {
                         System.out.print("Hải Phòng");
                         break;
                     case 4:
-                        System.out.print("Lai Châu");
+                        System.out.print("Chưa xác định");
                         break;
                     case 5:
                         System.out.print("Sơn La");
@@ -182,7 +182,7 @@ public class Person implements Serializable {
                         System.out.print("Lào Cai");
                         break;
                     case 7:
-                        System.out.print("Hà Tuyên");
+                        System.out.print("Chưa xác định");
                         break;
                     case 8:
                         System.out.print("Chưa xác định");
@@ -204,28 +204,28 @@ public class Person implements Serializable {
                         System.out.print("Quảng Ninh");
                         break;
                     case 1:
-                        System.out.print("Hà Tây");
-                        break;
-                    case 2:
                         System.out.print("Chưa xác định");
                         break;
+                    case 2:
+                        System.out.print("Bắc Ninh/Bắc Giang");
+                        break;
                     case 3:
-                        System.out.print("Vĩnh Phúc");
+                        System.out.print("Chưa xác định");
                         break;
                     case 4:
-                        System.out.print("Hải Dương");
+                        System.out.print("Chưa xác định");
                         break;
                     case 5:
                         System.out.print("Chưa xác định");
                         break;
                     case 6:
-                        System.out.print("Hà Nam");
+                        System.out.print("Chưa xác định");
                         break;
                     case 7:
                         System.out.print("Thanh Hoá");
                         break;
                     case 8:
-                        System.out.print("Nghệ An");
+                        System.out.print("Chưa xác định");
                         break;
                     case 9:
                         System.out.print("Chưa xác định");
@@ -237,13 +237,13 @@ public class Person implements Serializable {
             case 2:
                 switch (Integer.parseInt(cmndList[1])) {
                     case 0:
-                        System.out.print("Quảng Nam");
+                        System.out.print("Đà Nẵng");
                         break;
                     case 1:
-                        System.out.print("Bình Định");
+                        System.out.print("Chưa xác định");
                         break;
                     case 2:
-                        System.out.print("Phú Yên");
+                        System.out.print("Chưa xác định");
                         break;
                     case 3:
                         if (Integer.parseInt(cmndList[2]) == 0 || Integer.parseInt(cmndList[2]) == 1) {
@@ -253,7 +253,11 @@ public class Person implements Serializable {
                         }
                         break;
                     case 4:
-                        System.out.print("Đắk Lắk");
+                        if (Integer.parseInt(cmndList[2]) == 5) {
+                            System.out.print("Đắk Nông");
+                        } else {
+                            System.out.println("Đắk Lắk");
+                        }
                         break;
                     case 5:
                         System.out.print("Lâm Đồng");
@@ -263,6 +267,13 @@ public class Person implements Serializable {
                         break;
                     case 7:
                         System.out.print("Chưa xác định");
+                        break;
+                    case 8:
+                        if(Integer.parseInt(cmndList[2]) == 5){
+                            System.out.println("Bình Phước");
+                        } else if (Integer.parseInt(cmndList[2]) == 0) {
+                            System.out.println("Bình Dương");
+                        }
                         break;
                     case 9:
                         System.out.print("Tây Ninh");
@@ -283,7 +294,7 @@ public class Person implements Serializable {
                         System.out.print("Bến Tre");
                         break;
                     case 3:
-                        System.out.print("Vĩnh Long");
+                        System.out.print("Chưa xác định");
                         break;
                     case 4:
                         System.out.print("Đồng Tháp");
@@ -292,7 +303,10 @@ public class Person implements Serializable {
                         System.out.print("An Giang");
                         break;
                     case 6:
-                        System.out.print("Hậu Giang");
+                        System.out.print("Chưa xác định");
+                        break;
+                    case 7:
+                        System.out.println("Kiên Giang");
                         break;
                     case 8:
                         System.out.print("Chưa xác định");
@@ -499,9 +513,9 @@ public class Person implements Serializable {
     }
 
     public void displayF() {
-        System.out.print("Tên: "+this.getName() + "   ");
-        System.out.print("SĐT: "+this.getPhone() + "   ");
-        System.out.print("CMND: "+this.getCMND() + "   ");
-        System.out.print("Email: "+this.getMail() + "   ");
+        System.out.print("Tên: " + this.getName() + "   ");
+        System.out.print("SĐT: " + this.getPhone() + "   ");
+        System.out.print("CMND: " + this.getCMND() + "   ");
+        System.out.print("Email: " + this.getMail() + "   ");
     }
 }
