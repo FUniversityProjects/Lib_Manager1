@@ -89,8 +89,9 @@ class User extends Person implements Serializable{
     
     @Override
     public void display() {
-        System.out.println("ID: "+this.getID());
+        System.out.println("- ID: "+this.getID());
         super.display();
+        System.out.println("- Đang mượn: "+this.getBorrow());
     }
 }
 

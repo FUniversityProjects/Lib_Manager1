@@ -533,6 +533,7 @@ public class UserManager {
                         + "\n2. Hủy bỏ."
                         + "\n\tLựa chọn: ");
                 int c = scan.nextInt();
+                scan.nextLine();
                 if (c == 1) {
                     bb.setDateBorrow(form.format(day.getTime()));
                     day.add(day.DATE, 15);
@@ -573,7 +574,7 @@ public class UserManager {
         for (Book element : b.bookList) {
             if (element.getID().contains(idb)) {
                 i++;
-                element.displayF();
+                element.displayBorrow();
                 bb = element;
             }
         }
@@ -582,6 +583,8 @@ public class UserManager {
             for (User element : userName) {
                 for (int k = 0; k < element.borrowedBooks.size(); k++) {
                     if (element.borrowedBooks.get(k).getID().equals(bb.getID())) {
+                        ArrayList<Book> book_delete = new ArrayList<>();
+                        book_delete.add(element.borrowedBooks.get(k));
                         System.out.println("Người mượn: " + element.getName() + " (ID: " + element.getID() + ")");
                         System.out.println("Ngày mượn: " + bb.getDateBorrow() + "   Ngày trả: " + bb.getDateRefund());
                         String now = form.format(d.getTime());
@@ -601,8 +604,9 @@ public class UserManager {
                                 + "\n2. Hủy bỏ."
                                 + "\n\tLựa chọn: ");
                         int c = scan.nextInt();
+                        scan.nextLine();
                         if (c == 1) {
-                            element.borrowedBooks.remove(bb);
+                            element.borrowedBooks.remove(book_delete);
                             for (int j = 0; j < b.bookList.size(); j++) {
                                 if (b.bookList.get(j).getID().equals(bb.getID())) {
                                     b.bookList.get(j).setBorrowed(false);
