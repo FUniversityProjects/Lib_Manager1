@@ -278,6 +278,13 @@ public class UserManager {
         userName.add(ad);
         passList.add(pass);
         writeFile();
+
+        BookManager b = new BookManager();
+        b.readFile();
+        for (int i = 0; i < b.bookList.size(); i++) {
+            b.bookList.get(i).setBorrowed(false);
+        }
+        b.writeFile();
     }
 
     public void connect() {
@@ -535,28 +542,41 @@ public class UserManager {
                 int c = scan.nextInt();
                 scan.nextLine();
                 if (c == 1) {
-                    bb.setDateBorrow(form.format(day.getTime()));
-                    day.add(day.DATE, 15);
-                    bb.setDateRefund(form.format(day.getTime()));
-                    for (int j = 0; j < userName.size(); j++) {
-                        if (userName.get(j).getID().equals(u.getID())) {
-                            userName.get(j).setBorrow(true);
-                            userName.get(j).borrowedBooks.add(bb);
+                    if (!bb.getBorrowed()) {
+                        bb.setDateBorrow(form.format(day.getTime()));
+                        day.add(day.DATE, 15);
+                        bb.setDateRefund(form.format(day.getTime()));
+                        for (int j = 0; j < userName.size(); j++) {
+                            if (userName.get(j).getID().equals(u.getID())) {
+                                userName.get(j).setBorrow(true);
+                                userName.get(j).borrowedBooks.add(bb);
+                            }
                         }
-                    }
-                    for (int k = 0; k < b.bookList.size(); k++) {
-                        if (b.bookList.get(k).getID().equals(bb.getID())) {
-                            b.bookList.get(k).setBorrowed(true);
+                        for (int k = 0; k < b.bookList.size(); k++) {
+                            if (b.bookList.get(k).getID().equals(bb.getID())) {
+                                b.bookList.get(k).setBorrowed(true);
 
+                            }
                         }
+                        b.writeFile();
+                        writeFile();
                     }
-                    b.writeFile();
-                    writeFile();
+                    else {
+                        System.out.println("Sách này hiện không có sẵn!");
+                    }
                 }
-            } else {
+            } 
+            else if (i == 0) {
+                System.out.println("Không tìm thấy sách!");
+            }
+            else {
                 System.out.println("Chỉ được chọn 1 sách!");
             }
-        } else {
+        } 
+        else if(i == 0) {
+            System.out.println("Không tìm thấy khách hàng!");
+        }
+        else {
             System.out.println("Chỉ chọn 1 khách hàng.");
         }
     }
@@ -565,14 +585,13 @@ public class UserManager {
         int i = 0;
         Calendar d = Calendar.getInstance();
         SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
-
         BookManager b = new BookManager();
         b.readFile();
         Book bb = new Book();
         System.out.print("Nhập ID sách: ");
         String idb = scan.nextLine();
         for (Book element : b.bookList) {
-            if (element.getID().contains(idb)) {
+            if (element.getID().contains(idb) && element.getBorrowed()) {
                 i++;
                 element.displayBorrow();
                 bb = element;
@@ -582,11 +601,10 @@ public class UserManager {
             //For each không được thì đổi thành for thường.
             for (User element : userName) {
                 for (int k = 0; k < element.borrowedBooks.size(); k++) {
-                    if (element.borrowedBooks.get(k).getID().equals(bb.getID())) {
+                    if (element.borrowedBooks.get(k).getID().equals(bb.getID()) && element.borrowedBooks.get(k).getBorrowed()) {
                         ArrayList<Book> book_delete = new ArrayList<>();
                         book_delete.add(element.borrowedBooks.get(k));
                         System.out.println("Người mượn: " + element.getName() + " (ID: " + element.getID() + ")");
-                        System.out.println("Ngày mượn: " + bb.getDateBorrow() + "   Ngày trả: " + bb.getDateRefund());
                         String now = form.format(d.getTime());
                         String[] nowl = now.split("/");
                         String[] ngaytra = bb.getDateRefund().split("/");
@@ -606,19 +624,28 @@ public class UserManager {
                         int c = scan.nextInt();
                         scan.nextLine();
                         if (c == 1) {
-                            element.borrowedBooks.remove(book_delete);
+                            element.borrowedBooks.remove(element.borrowedBooks.get(k));
+                            if (element.borrowedBooks.size() == 0) {
+                                element.setBorrow(false);
+                            }
                             for (int j = 0; j < b.bookList.size(); j++) {
                                 if (b.bookList.get(j).getID().equals(bb.getID())) {
                                     b.bookList.get(j).setBorrowed(false);
                                 }
                             }
+                            writeFile();
                             b.writeFile();
+                            break;
                         }
                     }
-
+                    
                 }
             }
-        } else {
+        } 
+        else if (i == 0) {
+            System.out.println("Không tìm thấy sách!");
+        }
+        else {
             System.out.println("Chỉ được chọn 1 sách!");
         }
 

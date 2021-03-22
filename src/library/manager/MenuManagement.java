@@ -131,6 +131,7 @@ public class MenuManagement {
 
     //menu admin
     public void menuAdmin() throws IOException, FileNotFoundException, ClassNotFoundException {
+
         int choice = 0;
         int choice2 = 0;
         do {
@@ -186,7 +187,7 @@ public class MenuManagement {
                                 System.out.println("Xin lỗi! Lựa chọn không hợp lệ!");
                                 break;
                         }
-                    } while (choice2 > 0 && choice2 < 6);
+                    } while (choice2 > 0 && choice2 < 8);
                     break;
                 case 2:
                     do {
@@ -258,6 +259,6 @@ public class MenuManagement {
                     System.out.println("Xin lỗi! Chỉ chọn từ 1 đến 5!");
                     menuAdmin();
             }
-        } while (choice > 0 && choice < 4);
+        } while (choice > 0 && choice < 5);
     }
 }

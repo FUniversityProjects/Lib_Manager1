@@ -5,6 +5,7 @@
  */
 package library.manager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ import java.util.Scanner;
  *
  * @author DELL
  */
-public class Books extends Book{
+public class Books extends Book implements Serializable{
     public int numberOfBooks;
     public ArrayList<Book> books;
 
@@ -23,9 +24,10 @@ public class Books extends Book{
     public void setNumberOfBooks(int numberOfBooks) {
         this.numberOfBooks = numberOfBooks;
     }
-    Scanner scan = new Scanner(System.in);
+    
     
     public void inputs() {
+        Scanner scan = new Scanner(System.in);
         super.input();
         System.out.print("- Số lượng: "); 
         this.setNumberOfBooks(scan.nextInt());

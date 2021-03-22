@@ -117,9 +117,10 @@ public class Book implements Serializable{
         this.ID = ID;
     }
 
-    transient Scanner sc = new Scanner(System.in);
+    
 
     public void input() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("----------- NHẬP THÔNG TIN SÁCH -----------");
         System.out.print("- Tên: ");
         this.setBookname(sc.nextLine());

@@ -19,7 +19,7 @@ public class BookManager {
     public int numberOfBooks;
     public Books books = new Books();
 
-    Scanner scan = new Scanner(System.in);
+    transient Scanner scan = new Scanner(System.in);
 
     public void addBooks() {
         int flag = 0;
@@ -52,6 +52,7 @@ public class BookManager {
     }
 
     public void display() {
+        readFile();
         boolean flag = false;
         System.out.println("Danh sách: ");
         for (Book element : bookList) {
