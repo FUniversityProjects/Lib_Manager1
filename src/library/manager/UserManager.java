@@ -564,7 +564,7 @@ public class UserManager {
         int i = 0;
         Calendar d = Calendar.getInstance();
         SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         BookManager b = new BookManager();
         b.readFile();
         Book bb = new Book();
@@ -580,40 +580,41 @@ public class UserManager {
         if (i == 1) {
             //For each không được thì đổi thành for thường.
             for (User element : userName) {
-                if (element.borrowedBooks.contains(bb)) {
-                    System.out.println("Người mượn: " + element.getName() + " (ID: " + element.getID() + ")");
-                    System.out.println("Ngày mượn: " + bb.getDateBorrow() + "   Ngày trả: " + bb.getDateRefund());
-                    String now = form.format(d.getTime());
-                    String[] nowl = now.split("/");
-                    String[] ngaytra = bb.getDateRefund().split("/");
-                    LocalDate d1 = LocalDate.of(Integer.parseInt(nowl[nowl.length-1]), Integer.parseInt(nowl[nowl.length-2]), Integer.parseInt(nowl[nowl.length-3]));
-                    LocalDate d2 = LocalDate.of(Integer.parseInt(ngaytra[ngaytra.length-1]), Integer.parseInt(ngaytra[ngaytra.length-2]), Integer.parseInt(ngaytra[ngaytra.length-3]));
-                    Period ngayTre = Period.between(d1, d2);
-                    if(ngayTre.getDays() > 0) {
-                        System.out.println("Trễ: "+ngayTre.getDays()+" ngày");
-                    }
-                    else if (ngayTre.getDays() < 0) {
-                        System.out.println("Sớm: "+ngayTre.getDays()+" ngày");
-                    }
-                    else {
-                        System.out.println("Đúng hạn!");
-                    }
-                    System.out.print("1. Cho mượn."
-                            + "\n2. Hủy bỏ."
-                            + "\n\tLựa chọn: ");
-                    int c = scan.nextInt();
-                    if (c == 1) {
-                        element.borrowedBooks.remove(bb);
-                        for (int j = 0; j<b.bookList.size(); j++) {
-                            if (b.bookList.get(j).getID().equals(bb.getID())) {
-                                b.bookList.get(j).setBorrowed(false);
+                for (int k = 0; k < element.borrowedBooks.size(); k++) {
+                    if (element.borrowedBooks.get(k).getID().equals(bb.getID())) {
+                        System.out.println("Người mượn: " + element.getName() + " (ID: " + element.getID() + ")");
+                        System.out.println("Ngày mượn: " + bb.getDateBorrow() + "   Ngày trả: " + bb.getDateRefund());
+                        String now = form.format(d.getTime());
+                        String[] nowl = now.split("/");
+                        String[] ngaytra = bb.getDateRefund().split("/");
+                        LocalDate d1 = LocalDate.of(Integer.parseInt(nowl[nowl.length - 1]), Integer.parseInt(nowl[nowl.length - 2]), Integer.parseInt(nowl[nowl.length - 3]));
+                        LocalDate d2 = LocalDate.of(Integer.parseInt(ngaytra[ngaytra.length - 1]), Integer.parseInt(ngaytra[ngaytra.length - 2]), Integer.parseInt(ngaytra[ngaytra.length - 3]));
+                        Period ngayTre = Period.between(d1, d2);
+                        if (ngayTre.getDays() > 0) {
+                            System.out.println("Sớm: " + ngayTre.getDays() + " ngày");
+                        } else if (ngayTre.getDays() < 0) {
+                            System.out.println("Trễ: " + ngayTre.getDays() + " ngày");
+                        } else {
+                            System.out.println("Đúng hạn!");
+                        }
+                        System.out.print("1. Trả sách."
+                                + "\n2. Hủy bỏ."
+                                + "\n\tLựa chọn: ");
+                        int c = scan.nextInt();
+                        if (c == 1) {
+                            element.borrowedBooks.remove(bb);
+                            for (int j = 0; j < b.bookList.size(); j++) {
+                                if (b.bookList.get(j).getID().equals(bb.getID())) {
+                                    b.bookList.get(j).setBorrowed(false);
+                                }
                             }
+                            b.writeFile();
                         }
                     }
+
                 }
             }
-        }
-        else {
+        } else {
             System.out.println("Chỉ được chọn 1 sách!");
         }
 
