@@ -85,7 +85,7 @@ public class MenuManagement {
                                 b.findBook();
                                 break;
                             case 3:
-                                menuClient();
+                                break;
                             default:
                                 System.out.println("Xin lỗi! Lựa chọn không hợp lệ!");
                                 break;
@@ -113,15 +113,19 @@ public class MenuManagement {
                                 a.changePass();
                                 break;
                             case 4:
-                                menuClient();
+                                break;
                             default:
                                 System.out.println("Xin lỗi! Lựa chọn không hợp lệ!");
                                 break;
                         }
                     } while (choice2 > 0 && choice2 < 4);
                     break;
-                default:
+                case 3:
+                    System.out.println("Cảm ơn đã sử dụng dịch vụ!");
                     break;
+                default:
+                    System.out.println("Xin lỗi! Chỉ chọn từ 1 đến 3!");
+                    menuClient();
             }
         } while (choice > 0 && choice < 2);
     }
@@ -150,7 +154,8 @@ public class MenuManagement {
                                 + "4. Tìm sách.\n"
                                 + "5. Xem tất cả sách."
                                 + "\n6. Mượn sách."
-                                + "\n7. Trở lại."
+                                + "\n7. Trả sách."
+                                + "\n8. Trở lại."
                                 + "\n\tLựa chọn của bạn: ");
                         choice2 = scan.nextInt();
                         scan.nextLine();
@@ -174,12 +179,15 @@ public class MenuManagement {
                                 a.borrowBook();
                                 break;
                             case 7:
-                                menuAdmin();
+                                a.reFund();
+                                break;
+                            case 8:
+                                break;
                             default:
                                 System.out.println("Xin lỗi! Lựa chọn không hợp lệ!");
                                 break;
                         }
-                    } while (choice2 > 0 && choice2 < 7);
+                    } while (choice2 > 0 && choice2 < 6);
                     break;
                 case 2:
                     do {
@@ -202,9 +210,10 @@ public class MenuManagement {
                                 a.findUser();
                                 break;
                             case 4:
-                                menuAdmin();
+                                break;
                             default:
                                 System.out.println("Xin lỗi! Lựa chọn không hợp lệ!");
+                                break;
                         }
                     } while (choice2 > 0 && choice2 < 4);
                     break;
@@ -233,7 +242,7 @@ public class MenuManagement {
                                 System.out.println("Đang phát triển!");
                                 break;
                             case 5:
-                                menuAdmin();
+                                break;
                             default:
                                 System.out.println("Xin lỗi! Lựa chọn không hợp lệ!");
                                 break;
@@ -250,6 +259,6 @@ public class MenuManagement {
                     System.out.println("Xin lỗi! Chỉ chọn từ 1 đến 5!");
                     menuAdmin();
             }
-        } while (choice > 0 && choice < 5);
+        } while (choice > 0 && choice < 4);
     }
 }
