@@ -220,6 +220,7 @@ public class BookManager {
     }
 
     //Chưa perfect, xem lại
+    //Đã fix, chưa biết perfect chưa
     public void editByID() {
         ArrayList<Book> editList = new ArrayList<>();
         int flag = 0;
@@ -245,7 +246,7 @@ public class BookManager {
 
                 for (Book element : editList) {
                     for (int i = 0; i < bookList.size(); i++) {
-                        if (element.getBookname().equals(bookList.get(i).getBookname())) {
+                        if (element.getID().equals(bookList.get(i).getID())) {
                             System.out.println("Edit sách có ID: " + element.getID());
                             System.out.print("- Tác giả: ");
                             bookList.get(i).setAuthor(scan.nextLine());
