@@ -236,33 +236,28 @@ public class BookManager {
         if (flag == 0) {
             System.out.println("Không tìm thấy!");
         } else {
-            System.out.println("1. Sửa thông tin những sách này"
+            System.out.print("1. Sửa thông tin những sách này"
                     + "\n2. Hủy bỏ"
                     + "\n\t Lựa chọn: ");
             int c = scan.nextInt();
             scan.nextLine();
             if (c == 1) {
-                bookList.removeAll(editList);
+
                 for (Book element : editList) {
                     for (int i = 0; i < bookList.size(); i++) {
                         if (element.getBookname().equals(bookList.get(i).getBookname())) {
-                            bookList.get(i).setAmount(bookList.get(i).getAmount() - 1);
+                            System.out.println("Edit sách có ID: " + element.getID());
+                            System.out.print("- Tác giả: ");
+                            bookList.get(i).setAuthor(scan.nextLine());
+                            System.out.print("- Thể loại: ");
+                            bookList.get(i).setKind(scan.nextLine());
+                            System.out.print("- Tình trạng: ");
+                            bookList.get(i).setCondition(scan.nextLine());
+                            System.out.print("- Giá tiền (nghìn VNĐ): ");
+                            bookList.get(i).setMoney(scan.nextDouble());
+                            scan.nextLine();
                         }
                     }
-                    Book b = new Book();
-                    System.out.println("Edit sách có ID: " + element.getID());
-                    b.setID(element.getID());
-                    b.setBookname(element.getBookname());
-                    System.out.print("- Tác giả: ");
-                    b.setAuthor(scan.nextLine());
-                    System.out.print("- Thể loại: ");
-                    b.setKind(scan.nextLine());
-                    System.out.print("- Tình trạng: ");
-                    b.setCondition(scan.nextLine());
-                    System.out.print("- Giá tiền (nghìn VNĐ): ");
-                    b.setMoney(scan.nextDouble());
-                    scan.nextLine();
-                    bookList.add(b);
                 }
                 writeFile();
 
@@ -319,6 +314,5 @@ public class BookManager {
             }
         }
     }
-    
-    
+
 }

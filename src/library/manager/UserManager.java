@@ -593,7 +593,7 @@ public class UserManager {
         for (Book element : b.bookList) {
             if (element.getID().contains(idb) && element.getBorrowed()) {
                 i++;
-                element.displayBorrow();
+                element.displayF();
                 bb = element;
             }
         }
@@ -631,6 +631,8 @@ public class UserManager {
                             for (int j = 0; j < b.bookList.size(); j++) {
                                 if (b.bookList.get(j).getID().equals(bb.getID())) {
                                     b.bookList.get(j).setBorrowed(false);
+                                    b.bookList.get(j).setDateBorrow(null);
+                                    b.bookList.get(j).setDateRefund(null);
                                 }
                             }
                             writeFile();
