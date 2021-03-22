@@ -127,7 +127,7 @@ public class MenuManagement {
                     System.out.println("Xin lỗi! Chỉ chọn từ 1 đến 3!");
                     menuClient();
             }
-        } while (choice > 0 && choice < 2);
+        } while (choice > 0 && choice < 3);
     }
 
     //menu admin
