@@ -204,7 +204,7 @@ public class BookManager {
         if (flag == 0) {
             System.out.println("Không tìm thấy!");
         } else {
-            System.out.println("1. Xóa những sách này"
+            System.out.print("1. Xóa những sách này"
                     + "\n2. Hủy bỏ xóa"
                     + "\n\t Lựa chọn: ");
             int c = scan.nextInt();

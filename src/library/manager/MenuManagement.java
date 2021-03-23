@@ -42,7 +42,7 @@ public class MenuManagement {
 
     Scanner scan = new Scanner(System.in);
 
-    public void loginMenu() throws IOException, FileNotFoundException, ClassNotFoundException {
+    public void loginMenu() throws IOException, FileNotFoundException, ClassNotFoundException, MyException {
         int i = a.login();
         if (i == 1) {
             b.readFile();
@@ -55,12 +55,12 @@ public class MenuManagement {
     }
 
     //menu client
-    public void menuClient() {
+    public void menuClient() throws MyException {
         int choice = 0;
         int choice2 = 0;
         do {
             System.out.println("----------- MENU KHÁCH HÀNG -----------");
-            System.out.print("1. Quản lí sách.\n"
+            System.out.print("1. Thông tin sách.\n"
                     + "2. Thông tin cá nhân.\n"
                     + "3. Thoát."
                     + "\n\tLựa chọn của bạn: ");
@@ -130,7 +130,7 @@ public class MenuManagement {
     }
 
     //menu admin
-    public void menuAdmin() throws IOException, FileNotFoundException, ClassNotFoundException {
+    public void menuAdmin() throws IOException, FileNotFoundException, ClassNotFoundException, MyException {
 
         int choice = 0;
         int choice2 = 0;
@@ -222,9 +222,8 @@ public class MenuManagement {
                         System.out.println("----------- BÁO CÁO -----------");
                         System.out.print("1. Số lượng user hiện có.\n"
                                 + "2. Số lượng sách hiện có.\n"
-                                + "3. chưa có idea.\n"
-                                + "4. Danh sách user cháy deadline.\n"
-                                + "5. Trở lại."
+                                + "3. Danh sách user quá hạn ngày trả sách.\n"
+                                + "4. Trở lại."
                                 + "\n\tLựa chọn của bạn: ");
                         choice2 = scan.nextInt();
                         scan.nextLine();
@@ -236,18 +235,15 @@ public class MenuManagement {
                                 a.reportBook();
                                 break;
                             case 3:
-                                System.out.println("Đang phát triển!");
-                                break;
-                            case 4:
                                 a.reportUserOverDeadline();
                                 break;
-                            case 5:
+                            case 4:
                                 break;
                             default:
                                 System.out.println("Xin lỗi! Lựa chọn không hợp lệ!");
                                 break;
                         }
-                    } while (choice2 > 0 && choice2 < 5);
+                    } while (choice2 > 0 && choice2 < 4);
                     break;
                 case 4:
                     a.changePass();

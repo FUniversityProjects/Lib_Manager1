@@ -5,6 +5,8 @@
  */
 package library.manager;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +22,8 @@ public class LibraryManager {
             System.err.println(ex.getMessage());
                 } catch (ClassNotFoundException ex) {
             System.err.println(ex.getMessage());
+        } catch (MyException ex) {
+            Logger.getLogger(LibraryManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
