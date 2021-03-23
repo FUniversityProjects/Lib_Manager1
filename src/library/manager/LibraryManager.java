@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package library.manager;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -14,10 +12,14 @@ import java.io.IOException;
  */
 public class LibraryManager {
 
-    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
-        MenuManagement m = new MenuManagement();
-        m.loginMenu();
-//            UserManager u = new UserManager();
-//            u.format();
+    public static void main(String[] args) {
+        try {
+            MenuManagement m = new MenuManagement();
+            m.loginMenu();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+                } catch (ClassNotFoundException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }

@@ -75,7 +75,7 @@ public class UserManager {
             objI.close();
             fileI.close();
         }
-        return numberOfUser-1;
+        return numberOfUser - 1;
     }
 
     public void writeFileUser() {
@@ -265,7 +265,7 @@ public class UserManager {
         }
     }
 
-    public void format() {
+    public void format() throws MyException {
         User ad = new User();
         Password pass = new Password();
         ad.setID("A20210001");
@@ -319,7 +319,7 @@ public class UserManager {
     public void displayList() throws IOException, FileNotFoundException, ClassNotFoundException {
         System.out.println("----------- DANH SÁCH KHÁCH HÀNG (" + this.numberOfUser() + ") -----------");
         for (User element : userName) {
-            if(!element.getIsAd()) {
+            if (!element.getIsAd()) {
                 element.displayList();
             }
         }
@@ -365,7 +365,7 @@ public class UserManager {
     /**
      * Đổi mật khẩu, đã fix.
      */
-    public void changePass() {
+    public void changePass() throws MyException {
         System.out.print("- Nhập mật khẩu hiện tại: ");
         String currentPass = scan.nextLine();
         if (pass.getPassword().equals(currentPass)) {
@@ -391,7 +391,7 @@ public class UserManager {
         }
     }
 
-    public void findUser() {
+    public void findUser() throws MyException {
         ArrayList<User> selectUser = new ArrayList<User>();
         System.out.print("Chọn khách hàng: ");
         String key = scan.nextLine();
@@ -482,6 +482,7 @@ public class UserManager {
         System.out.println("Sách đang mượn: ");
         for (Book element : user.borrowedBooks) {
             element.displayBorrow();
+            System.out.println((computeDeadline(element.getDateRefund()) >= 0) ? "Hạn trả: " : "Trễ: " + Math.abs(computeDeadline(element.getDateRefund())) + " ngày");
             flag = true;
         }
 
@@ -548,7 +549,7 @@ public class UserManager {
                 if (c == 1) {
                     if (!bb.getBorrowed()) {
                         bb.setDateBorrow(form.format(day.getTime()));
-                        day.add(day.DATE, -15);
+                        day.add(day.DATE, 15);
                         bb.setDateRefund(form.format(day.getTime()));
                         for (int j = 0; j < userName.size(); j++) {
                             if (userName.get(j).getID().equals(u.getID())) {
@@ -564,31 +565,24 @@ public class UserManager {
                         }
                         b.writeFile();
                         writeFile();
-                    }
-                    else {
+                    } else {
                         System.out.println("Sách này hiện không có sẵn!");
                     }
                 }
-            } 
-            else if (i == 0) {
+            } else if (i == 0) {
                 System.out.println("Không tìm thấy sách!");
-            }
-            else {
+            } else {
                 System.out.println("Chỉ được chọn 1 sách!");
             }
-        } 
-        else if(i == 0) {
+        } else if (i == 0) {
             System.out.println("Không tìm thấy khách hàng!");
-        }
-        else {
+        } else {
             System.out.println("Chỉ chọn 1 khách hàng.");
         }
     }
 
     public void reFund() {
         int i = 0;
-        Calendar d = Calendar.getInstance();
-        SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
         BookManager b = new BookManager();
         b.readFile();
         Book bb = new Book();
@@ -609,7 +603,7 @@ public class UserManager {
                         ArrayList<Book> book_delete = new ArrayList<>();
                         book_delete.add(element.borrowedBooks.get(k));
                         System.out.println("Người mượn: " + element.getName() + " (ID: " + element.getID() + ")");
-                        
+
                         if (computeDeadline(bb.getDateRefund()) > 0) {
                             System.out.println("Sớm: " + computeDeadline(bb.getDateRefund()) + " ngày");
                         } else if (computeDeadline(bb.getDateRefund()) < 0) {
@@ -639,29 +633,28 @@ public class UserManager {
                             break;
                         }
                     }
-                    
+
                 }
             }
-        } 
-        else if (i == 0) {
+        } else if (i == 0) {
             System.out.println("Không tìm thấy sách!");
-        }
-        else {
+        } else {
             System.out.println("Chỉ được chọn 1 sách!");
         }
     }
-    
+
     public void reportUser() throws IOException, FileNotFoundException, ClassNotFoundException {
         System.out.println("Tổng số khách hàng: " + numberOfUser());
     }
-    
+
     public void reportBook() {
         BookManager b = new BookManager();
-        System.out.println("Tổng số sách hiện có: "+b.numOfBook());
+        System.out.println("Tổng số sách hiện có: " + b.numOfBook());
     }
-    
+
     /**
      * Tính ngày trả sách xem sớm hay muộn.
+     *
      * @param ngayTra ngày (String (dd/MM/yyyy)).
      * @return số ngày âm là trễ, dương là sớm (int).
      */
@@ -670,26 +663,31 @@ public class UserManager {
         SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
         String[] now = form.format(d.getTime()).split("/");
         String[] ngayTral = ngayTra.split("/");
-        LocalDate nowd = LocalDate.of(Integer.parseInt(now[now.length -1]), Integer.parseInt(now[now.length -2]), Integer.parseInt(now[now.length -3]));
-        LocalDate ngayTrad = LocalDate.of(Integer.parseInt(ngayTral[ngayTral.length -1]), Integer.parseInt(ngayTral[ngayTral.length -2]), Integer.parseInt(ngayTral[ngayTral.length -3]));
+        LocalDate nowd = LocalDate.of(Integer.parseInt(now[now.length - 1]), Integer.parseInt(now[now.length - 2]), Integer.parseInt(now[now.length - 3]));
+        LocalDate ngayTrad = LocalDate.of(Integer.parseInt(ngayTral[ngayTral.length - 1]), Integer.parseInt(ngayTral[ngayTral.length - 2]), Integer.parseInt(ngayTral[ngayTral.length - 3]));
         Period compare = Period.between(nowd, ngayTrad);
         return compare.getDays();
     }
-    
+
     public void reportBorrowedBook() {
-        
+
     }
-    
+
     public void reportUserOverDeadline() {
         readFile();
+        boolean flag = false;
         for (User elementU : userName) {
             for (Book elementB : elementU.borrowedBooks) {
                 if (computeDeadline(elementB.getDateRefund()) < 0) {
                     elementB.displayBorrow();
-                    System.out.println("Người mượn: "+elementU.getName());
-                    System.out.println("Trễ: "+ Math.abs(computeDeadline(elementB.getDateRefund())) + " ngày");
+                    System.out.println("Người mượn: " + elementU.getName());
+                    System.out.println("Trễ: " + Math.abs(computeDeadline(elementB.getDateRefund())) + " ngày");
+                    flag = true;
                 }
             }
+        }
+        if (!flag) {
+            System.out.println("Danh sách trống!");
         }
     }
 }

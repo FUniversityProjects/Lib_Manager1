@@ -7,6 +7,8 @@ package library.manager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,8 +32,13 @@ class User extends Person implements Serializable{
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String userName) throws MyException {
+        if(userName.equals("")) {
+            throw new MyException("Tên tài khoản không thể trống!");
+        }
+        else {
+            this.userName = userName;
+        }
     }
 
     public User() {
@@ -71,9 +78,14 @@ class User extends Person implements Serializable{
     
     @Override
     public void input(){
-        System.out.println("----------- NHẬP THÔNG TIN NGƯỜI DÙNG -----------");
-        System.out.print("- Nhập tài khoản: "); this.setUserName(sc.nextLine());
-        super.input();
+        try {
+            System.out.println("----------- NHẬP THÔNG TIN NGƯỜI DÙNG -----------");
+            System.out.print("- Nhập tài khoản: "); this.setUserName(sc.nextLine());
+            super.input();
+        } catch (MyException ex) {
+            System.out.println(ex.getMessage());
+            input();
+        }
     }
     
     public void inputEdit(){
