@@ -151,6 +151,6 @@ public class Book implements Serializable{
     }
     
     public void displayBorrow() {
-        System.out.format("ID: %s   Tên: %s   Thể loại: %s   Tác giả: %s%nNgày mượn: %s   Ngày trả: %s%n", this.getID(), this.getBookname(), this.getKind(), this.getAuthor(), this.getDateBorrow(), this.getDateRefund());
+        System.out.format("ID: %s   Tên: %s   Thể loại: %s   Tác giả: %s%nNgày mượn: %s   Ngày phải trả: %s%n", this.getID(), this.getBookname(), this.getKind(), this.getAuthor(), this.getDateBorrow(), this.getDateRefund());
     }
 }

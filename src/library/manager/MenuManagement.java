@@ -223,7 +223,7 @@ public class MenuManagement {
                         System.out.print("1. Số lượng user hiện có.\n"
                                 + "2. Số lượng sách hiện có.\n"
                                 + "3. chưa có idea.\n"
-                                + "4. chưa có idea.\n"
+                                + "4. Danh sách user cháy deadline.\n"
                                 + "5. Trở lại."
                                 + "\n\tLựa chọn của bạn: ");
                         choice2 = scan.nextInt();
@@ -239,7 +239,7 @@ public class MenuManagement {
                                 System.out.println("Đang phát triển!");
                                 break;
                             case 4:
-                                System.out.println("Đang phát triển!");
+                                a.reportUserOverDeadline();
                                 break;
                             case 5:
                                 break;

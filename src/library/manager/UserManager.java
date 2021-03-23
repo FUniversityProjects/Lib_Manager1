@@ -143,6 +143,7 @@ public class UserManager {
         File file = new File("./User.txt");
         FileInputStream fileI = null;
         ObjectInputStream objI = null;
+        userName.removeAll(userName);
         try {
             if (file.exists()) {
                 fileI = new FileInputStream(file);
@@ -210,6 +211,7 @@ public class UserManager {
         File file = new File("./P.txt");
         FileInputStream fileI = null;
         ObjectInputStream objI = null;
+        passList.removeAll(passList);
         try {
             if (file.exists()) {
                 fileI = new FileInputStream(file);
@@ -391,7 +393,7 @@ public class UserManager {
 
     public void findUser() {
         ArrayList<User> selectUser = new ArrayList<User>();
-        System.out.print("Nhap tu khoa: ");
+        System.out.print("Chọn khách hàng: ");
         String key = scan.nextLine();
         int flag = 0;
         System.out.println("Kết quả tìm kiếm:");
@@ -546,7 +548,7 @@ public class UserManager {
                 if (c == 1) {
                     if (!bb.getBorrowed()) {
                         bb.setDateBorrow(form.format(day.getTime()));
-                        day.add(day.DATE, 15);
+                        day.add(day.DATE, -15);
                         bb.setDateRefund(form.format(day.getTime()));
                         for (int j = 0; j < userName.size(); j++) {
                             if (userName.get(j).getID().equals(u.getID())) {
@@ -611,7 +613,7 @@ public class UserManager {
                         if (computeDeadline(bb.getDateRefund()) > 0) {
                             System.out.println("Sớm: " + computeDeadline(bb.getDateRefund()) + " ngày");
                         } else if (computeDeadline(bb.getDateRefund()) < 0) {
-                            System.out.println("Trễ: " + computeDeadline(bb.getDateRefund()) + " ngày");
+                            System.out.println("Trễ: " + Math.abs(computeDeadline(bb.getDateRefund())) + " ngày");
                         } else {
                             System.out.println("Đúng hạn!");
                         }
@@ -658,6 +660,11 @@ public class UserManager {
         System.out.println("Tổng số sách hiện có: "+b.numOfBook());
     }
     
+    /**
+     * Tính ngày trả sách xem sớm hay muộn.
+     * @param ngayTra ngày (String (dd/MM/yyyy)).
+     * @return số ngày âm là trễ, dương là sớm (int).
+     */
     public int computeDeadline(String ngayTra) {
         Calendar d = Calendar.getInstance();
         SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
@@ -674,6 +681,15 @@ public class UserManager {
     }
     
     public void reportUserOverDeadline() {
-        
+        readFile();
+        for (User elementU : userName) {
+            for (Book elementB : elementU.borrowedBooks) {
+                if (computeDeadline(elementB.getDateRefund()) < 0) {
+                    elementB.displayBorrow();
+                    System.out.println("Người mượn: "+elementU.getName());
+                    System.out.println("Trễ: "+ Math.abs(computeDeadline(elementB.getDateRefund())) + " ngày");
+                }
+            }
+        }
     }
 }
