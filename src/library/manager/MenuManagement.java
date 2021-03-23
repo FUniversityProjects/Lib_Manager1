@@ -220,8 +220,8 @@ public class MenuManagement {
                 case 3:
                     do {
                         System.out.println("----------- BÁO CÁO -----------");
-                        System.out.print("1. Số sách được mượn (Tháng).\n"
-                                + "2. chưa có idea.\n"
+                        System.out.print("1. Số lượng user hiện có.\n"
+                                + "2. Số lượng sách hiện có.\n"
                                 + "3. chưa có idea.\n"
                                 + "4. chưa có idea.\n"
                                 + "5. Trở lại."
@@ -230,10 +230,10 @@ public class MenuManagement {
                         scan.nextLine();
                         switch (choice2) {
                             case 1:
-                                System.out.println("Đang phát triển!");
+                                a.reportUser();
                                 break;
                             case 2:
-                                System.out.println("Đang phát triển!");
+                                a.reportBook();
                                 break;
                             case 3:
                                 System.out.println("Đang phát triển!");

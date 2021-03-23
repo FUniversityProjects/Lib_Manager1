@@ -21,6 +21,11 @@ public class BookManager {
 
     transient Scanner scan = new Scanner(System.in);
 
+    public int numOfBook() {
+        readFile();
+        return bookList.size();
+    }
+    
     public void addBooks() {
         int flag = 0;
         books.inputs();
