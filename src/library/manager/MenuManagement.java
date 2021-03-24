@@ -60,7 +60,7 @@ public class MenuManagement {
         int choice2 = 0;
         do {
             System.out.println("----------- MENU KHÁCH HÀNG -----------");
-            System.out.print("1. Quản lí sách.\n"
+            System.out.print("1. Thông tin sách.\n"
                     + "2. Thông tin cá nhân.\n"
                     + "3. Thoát."
                     + "\n\tLựa chọn của bạn: ");
@@ -222,7 +222,7 @@ public class MenuManagement {
                         System.out.println("----------- BÁO CÁO -----------");
                         System.out.print("1. Số lượng user hiện có.\n"
                                 + "2. Số lượng sách hiện có.\n"
-                                + "3. Danh sách user cháy deadline.\n"
+                                + "3. Danh sách user quá hạn ngày trả sách.\n"
                                 + "4. Trở lại."
                                 + "\n\tLựa chọn của bạn: ");
                         choice2 = scan.nextInt();

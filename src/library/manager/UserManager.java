@@ -317,10 +317,14 @@ public class UserManager {
     }
 
     public void displayList() throws IOException, FileNotFoundException, ClassNotFoundException {
-        System.out.println("----------- DANH SÁCH KHÁCH HÀNG (" + this.numberOfUser() + ") -----------");
-        for (User element : userName) {
-            if (!element.getIsAd()) {
-                element.displayList();
+        if (this.numberOfUser() <= 0) {
+            System.out.println("Danh sách trống!!");
+        } else {
+            System.out.println("----------- DANH SÁCH KHÁCH HÀNG (" + this.numberOfUser() + ") -----------");
+            for (User element : userName) {
+                if (!element.getIsAd()) {
+                    element.displayList();
+                }
             }
         }
     }
