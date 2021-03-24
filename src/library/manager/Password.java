@@ -7,8 +7,6 @@ package library.manager;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +29,9 @@ public class Password implements Serializable{
     public void setPassword(String password) throws MyException {
         if(password.equals("")) {
             throw new MyException("Mật khẩu không thể bỏ trống!");
+        }
+        else {
+            this.password = password;
         }
     }
 
